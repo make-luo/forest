@@ -2,7 +2,9 @@
   <div class="footerContainer">
     <el-image :src="require('../assets/imgs/logo.png')" fit="cover"></el-image>
     <div class="main">
-      <div class="copyright">Copyright © <span>{{time}}</span> luoking.top</div>
+      <div class="copyright">
+        Copyright © <span>{{ time }}</span> luoking.top
+      </div>
       <el-link
         :underline="false"
         type="info"
@@ -23,6 +25,40 @@
           >赣ICP备2022003798号</el-link
         >
       </div>
+      <el-tooltip class="item" effect="dark" placement="top">
+        <div slot="content">
+          <el-image
+            style="width: 100px; height: 100px"
+            :src="require('../assets/imgs/qq.jpg')"
+            fit="cover"
+          ></el-image>
+        </div>
+
+        <el-button class="iconfont icon-qq" circle></el-button>
+      </el-tooltip>
+      <el-tooltip class="item" effect="dark" placement="top">
+        <div slot="content">
+          <el-image
+            style="width: 100px; height: 100px"
+            :src="require('../assets/imgs/weixin.jpg')"
+            fit="cover"
+          ></el-image>
+        </div>
+
+        <el-button class="iconfont icon-ai-weixin" circle></el-button>
+      </el-tooltip>
+      <el-link
+        :underline="false"
+        href="https://github.com/make-luo?tab=repositories"
+      >
+        <el-button class="iconfont icon-github-fill" circle></el-button>
+      </el-link>
+      <el-link
+        :underline="false"
+        href="https://gitee.com/luokings"
+      >
+        <el-button class="iconfont icon-gitee-fill-round" circle></el-button>
+      </el-link>
     </div>
     <div class="introduce">不断学习,拯救处于混沌中的我</div>
   </div>
@@ -31,14 +67,14 @@
 <script>
 export default {
   name: "Footer",
-  data(){
-    return{
-        time:"",
-    }
+  data() {
+    return {
+      time: "",
+    };
   },
   mounted() {
-    var time =  new Date().getFullYear();
-    this.time = time
+    var time = new Date().getFullYear();
+    this.time = time;
   },
 };
 </script>
@@ -52,14 +88,15 @@ export default {
   font-size: (20 / @rem);
   background-color: #fff;
   padding: (20 / @rem) (30 / @rem);
-  margin-top: (100/@rem);
+  margin-top: (100 / @rem);
   a {
     font-size: (20 / @rem);
     color: #666;
     text-decoration: none;
+    margin-left: (10/@rem);
   }
-  .main{
-    margin-left: (140/@rem);
+  .main {
+    margin-left: (140 / @rem);
   }
   .el-image {
     height: (100 / @rem);
