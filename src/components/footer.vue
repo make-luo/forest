@@ -34,7 +34,7 @@
           ></el-image>
         </div>
 
-        <el-button class="iconfont icon-qq" circle></el-button>
+        <el-button class="iconfont icon-qq" ></el-button>
       </el-tooltip>
       <el-tooltip class="item" effect="dark" placement="top">
         <div slot="content">
@@ -45,19 +45,19 @@
           ></el-image>
         </div>
 
-        <el-button class="iconfont icon-ai-weixin" circle></el-button>
+        <el-button class="iconfont icon-ai-weixin" ></el-button>
       </el-tooltip>
       <el-link
         :underline="false"
         href="https://github.com/make-luo?tab=repositories"
       >
-        <el-button class="iconfont icon-github-fill" circle></el-button>
+        <el-button class="iconfont icon-github-fill" ></el-button>
       </el-link>
       <el-link
         :underline="false"
         href="https://gitee.com/luokings"
       >
-        <el-button class="iconfont icon-gitee-fill-round" circle></el-button>
+        <el-button class="iconfont icon-gitee-fill-round" ></el-button>
       </el-link>
     </div>
     <div class="introduce">不断学习,拯救处于混沌中的我</div>
@@ -106,6 +106,13 @@ export default {
     &:hover {
       filter: blur(0px);
     }
+  }
+  .el-button{
+    padding: 0;
+    width: (50/@rem);
+    height: (50/@rem);
+    font-size: (20/@rem);
+    border-radius: 50%;
   }
 }
 </style>

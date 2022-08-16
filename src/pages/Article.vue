@@ -1,7 +1,6 @@
 <template>
   <div class="comment-box">
     <ShowArticle></ShowArticle>
-    <CommentCard></CommentCard>
     <MessageBox> </MessageBox>
     <CommentArea>
       <MessageBox></MessageBox>
@@ -13,14 +12,13 @@
 import CommentArea from "../components/CommentArea.vue";
 import MessageBox from "../components/MessageBox.vue";
 import ShowArticle from "../components/ShowArticle.vue";
-import CommentCard from "../components/CommentCard.vue";
+
 export default {
   name: "Article",
   components: {
     CommentArea,
     MessageBox,
     ShowArticle,
-    CommentCard,
   },
 };
 </script>

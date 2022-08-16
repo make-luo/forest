@@ -1,7 +1,8 @@
 <template>
-  <div id="app">
+  <div id="app" class="app">
     <Nav></Nav>
     <router-view></router-view>
+    <el-backtop target=".app"></el-backtop>
     <Footer></Footer>
   </div>
 </template>
@@ -29,5 +30,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   background-color: #eceff3;
+}
+.app{
+  height: 100vh;
+  overflow-x:hidden ;
 }
 </style>

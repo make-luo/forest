@@ -12,7 +12,7 @@
     </div>
     <mavon-editor
       class="preview"
-      :value="content"
+      :value="value"
       :toolbarsFlag="false"
       :html="false"
       :subfield="false"
@@ -39,6 +39,11 @@ export default {
   },
   components: {
     mavonEditor,
+  },
+  computed: {
+    value() {
+      return this.content;
+    },
   },
 };
 </script>
@@ -70,18 +75,20 @@ export default {
     }
   }
   .preview {
+    font-size: (20 / @rem);
+    min-width: 100%;
     min-height: (100 / @rem);
   }
-  .article-info{
+  .article-info {
     min-height: (90 / @rem);
-    padding: 0 (30/@rem);
+    padding: 0 (30 / @rem);
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-top: 1px dashed #4b92a5;
-    font-size: (20/@rem);
-    .el-icon-collection-tag{
-        color: #4b92a5;
+    font-size: (20 / @rem);
+    .el-icon-collection-tag {
+      color: #4b92a5;
     }
   }
 }

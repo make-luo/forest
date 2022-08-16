@@ -63,8 +63,6 @@ export default {
   margin: 0 auto;
   padding-top: (400 / @rem);
   font-size: (20 / @rem);
-  .sortbox {
-  }
   .sortList {
     display: flex;
     justify-content: space-around;
