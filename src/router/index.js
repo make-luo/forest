@@ -5,29 +5,37 @@ import Article from '../pages/Article'
 import ShortPhrase from '../pages/ShortPhrase'
 import Comments from '../pages/Comments'
 import Friends from '../pages/Friends'
+import Sort from '../pages/Sort'
 export default new VueRouter(
     {
-        routes:[
+        routes: [
             {
-                path:'/',
-                component:Index
+                path: '/',
+                component: Index
             },
             {
-                path:'/article',
-                component:Article
+                path: '/sort',
+                component: Sort
             },
             {
-                path:'/shortPhrase',
-                component:ShortPhrase
+                path: '/article',
+                component: Article
             },
             {
-                path:'/comments',
-                component:Comments
+                path: '/shortPhrase',
+                component: ShortPhrase
             },
             {
-                path:'/friends',
-                component:Friends
+                path: '/comments',
+                component: Comments
+            },
+            {
+                path: '/friends',
+                component: Friends
             }
-        ]
+        ],
+        scrollBehavior(to, from, savedPosition) {// 解决vue页面之间跳转，页面不是在顶部的问题
+            return { x: 0, y: 0 }
+        }
     }
 )

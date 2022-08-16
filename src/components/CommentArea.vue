@@ -242,7 +242,7 @@ export default {
       }
     }
     .content {
-      width: (800 / @rem);
+      width: (720 / @rem);
       text-align: left;
       font-size: (15 / @rem);
       span {

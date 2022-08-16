@@ -1,26 +1,23 @@
 <template>
   <div>
+    <CommentCardVue></CommentCardVue>
     <el-row>
       <el-col :md="24">
         <div class="message-box">
           <div class="user-info">
-            <span>昵称:</span><input type="text" name="name" />
-            <span>邮箱:</span> <input type="email" name="email" />
-            <span>网站(选填):</span>
-            <input type="text" name="name" />
+            <span>昵称:</span
+            ><el-input v-model="input" placeholder="请输入昵称"></el-input>
+            <span>邮箱:</span
+            ><el-input v-model="input" placeholder="请输入邮箱"></el-input>
           </div>
           <div class="line"></div>
-          <mavon-editor
-            class="edit"
-            :toolbarsFlag="false"
-            :html="false"
-            :subfield="false"
-            :boxShadow="false"
-            :autofocus="false"
-            placeholder="留下你的足迹"
-            defaultOpen="edit"
+          <el-input
+            type="textarea"
+            :autosize="{ minRows: 6 }"
+            placeholder="请输入内容"
             v-model="content"
-          ></mavon-editor>
+          >
+          </el-input>
           <div v-show="show">
             <span class="preshow">预览：</span>
             <mavon-editor
@@ -64,6 +61,7 @@
 
 <script>
 import { mavonEditor } from "mavon-editor";
+import CommentCardVue from "./CommentCard.vue";
 import "mavon-editor/dist/css/index.css";
 export default {
   name: "MessageBox",
@@ -71,10 +69,12 @@ export default {
     return {
       content: "",
       show: false,
+      input: "",
     };
   },
   components: {
     mavonEditor,
+    CommentCardVue,
   },
   methods: {
     display() {
@@ -115,21 +115,20 @@ export default {
 .message-box {
   margin: (50 / @rem);
   padding: (60 / @rem);
-  background-color: #f7f7f5;
+  background-color: #fff;
   border-radius: (30 / @rem);
   .user-info {
     font-size: (20 / @rem);
-    input {
+
+    .el-input {
       font-size: (20 / @rem);
-      width: (160 / @rem);
-      background-color: #f7f7f5;
-      border: 0px solid transparent;
-      outline: none;
+      width: 40%;
+      background-color: #f5f5f5;
     }
   }
   .line {
     border-bottom: 1px dashed #4b92a5;
-    margin-bottom: (8 / @rem);
+    margin: (8 / @rem) 0;
   }
   .edit,
   .preview {

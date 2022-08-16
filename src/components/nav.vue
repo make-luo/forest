@@ -11,7 +11,7 @@
     <transition>
       <ul class="nav-list" v-show="show">
         <li>
-          <router-link to="/article"> <span>📚</span>分类</router-link>
+          <router-link to="/sort"> <span>📚</span>分类</router-link>
         </li>
         <li>
           <router-link to="/shortPhrase"><span>📖</span>短句</router-link>

@@ -44,7 +44,7 @@ export default {
 .shortcard {
   background-color: #fff;
   padding: (40 / @rem);
-     margin: (50 / @rem);
+  margin: (50 / @rem);
   border-radius: (30 / @rem);
   display: flex;
   flex-direction: column;

@@ -96,7 +96,7 @@ export default {
 @rem: 32rem;
 .friend-box {
   position: relative;
-  max-width: (1255 / @rem);
+  max-width: (1170 / @rem);
   min-width: (800 / @rem);
   margin: 0 auto;
   padding: (20 / @rem);

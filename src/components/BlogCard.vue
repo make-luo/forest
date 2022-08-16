@@ -1,123 +1,36 @@
 <template>
   <el-row>
     <el-col :md="24">
-      <div class="card-container">
-                <div class="img-box">
-          <el-image
-            :src="require('../assets/imgs/7.png')"
-            fit="cover"
-          ></el-image>
-        </div>
-        <div class="card-content">
-          <div class="content">
-            <h4 class="title">初始Vue</h4>
-            <span class="short"
-              >想让Vue工作，就必须创建一个Vue实例，且要传入一个配置对象....</span
-            >
-          </div>
-          <div class="author-targ">
-            <div class="author">
-              <el-image :src="require('../assets/imgs/logo.png')"></el-image>
-              <div class="blog-info">
-                <h4 class="name">山野</h4>
-                <span class="time">2022/08/09</span>
-              </div>
-            </div>
-            <div class="targ">
-              <span>Vue</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </el-col>
-    <el-col :md="24">
-      <div class="card-container">
-                <div class="img-box">
-          <el-image
-            :src="require('../assets/imgs/2.png')"
-            fit="cover"
-          ></el-image>
-        </div>
-        <div class="card-content">
-          <div class="content">
-            <h4 class="title">提升专注力</h4>
-            <span class="short"
-              >1.将目标设置的清晰，2.获得有效反馈，3.逃离舒适区....</span
-            >
-          </div>
-          <div class="author-targ">
-            <div class="author">
-              <el-image :src="require('../assets/imgs/logo.png')"></el-image>
-              <div class="blog-info">
-                <h4 class="name">山野</h4>
-                <span class="time">2022/08/09</span>
-              </div>
-            </div>
-            <div class="targ">
-              <span>方法</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </el-col>
-    <el-col :md="24">
-      <div class="card-container">
+      <div
+        class="card-container"
+        v-for="blogCard in blogCards"
+        :key="blogCard.blogId"
+      >
         <div class="img-box">
-          <el-image
-            :src="require('../assets/imgs/1.png')"
-            fit="cover"
-          ></el-image>
+          <router-link :to="blogCard.link">
+            <el-image
+              :src="require(`../assets/imgs/${blogCard.image}.png`)"
+              fit="cover"
+            ></el-image>
+          </router-link>
         </div>
-
         <div class="card-content">
           <div class="content">
-            <h4 class="title">科目四笔记</h4>
-            <span class="short"
-              >从桥下过来，转弯过来，走直了之后打左转向灯，然后到箭头那里...</span
-            >
+            <h4 class="title">{{ blogCard.title }}</h4>
+            <span class="short">{{ blogCard.introduce }}</span>
           </div>
           <div class="author-targ">
             <div class="author">
-              <el-image :src="require('../assets/imgs/logo.png')"></el-image>
+              <el-image
+                :src="require(`../assets/imgs/${blogCard.authorAvatar}.png`)"
+              ></el-image>
               <div class="blog-info">
-                <h4 class="name">山野</h4>
-                <span class="time">2022/08/09</span>
+                <h4 class="name">{{ blogCard.authorName }}</h4>
+                <span class="time">{{ blogCard.time }}</span>
               </div>
             </div>
             <div class="targ">
-              <span>方法</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </el-col>
-    <el-col :md="24">
-      <div class="card-container">
-        <div class="img-box">
-          <el-image
-            :src="require('../assets/imgs/起风了.png')"
-            fit="cover"
-          ></el-image>
-        </div>
-
-        <div class="card-content">
-          <div class="content">
-            <h4 class="title">一个重要的内置关系</h4>
-            <span class="short"
-              >一个重要的内置关系：VueComponent.prototype.__proto__ ===
-              Vue.prototype....</span
-            >
-          </div>
-          <div class="author-targ">
-            <div class="author">
-              <el-image :src="require('../assets/imgs/logo.png')"></el-image>
-              <div class="blog-info">
-                <h4 class="name">山野</h4>
-                <span class="time">2022/08/09</span>
-              </div>
-            </div>
-            <div class="targ">
-              <span>Vue</span>
+              <span>{{ blogCard.tag }}</span>
             </div>
           </div>
         </div>
@@ -129,6 +42,72 @@
 <script>
 export default {
   name: "BlogCard",
+  data() {
+    return {
+      blogCards: [
+        {
+          blogId: 1,
+          image: 7,
+          link: "/article",
+          title: "初始Vue",
+          introduce:
+            "想让Vue工作，就必须创建一个Vue实例，且要传入一个配置对象....",
+          authorAvatar: "logo",
+          authorName: "山野",
+          time: "2022/08/09",
+          tag: "Vue",
+        },
+        {
+          blogId: 5,
+          image: 4,
+          link: "/article",
+          title: "初始Vue",
+          introduce:
+            "想让Vue工作，就必须创建一个Vue实例，且要传入一个配置对象....",
+          authorAvatar: "logo",
+          authorName: "山野",
+          time: "2022/08/09",
+          tag: "Vue",
+        },
+        {
+          blogId: 2,
+          image: 1,
+          link: "/article",
+          title: "初始Vue",
+          introduce:
+            "想让Vue工作，就必须创建一个Vue实例，且要传入一个配置对象....",
+          authorAvatar: "logo",
+          authorName: "山野",
+          time: "2022/08/09",
+          tag: "Vue",
+        },
+        {
+          blogId: 3,
+          image: 2,
+          link: "/article",
+          title: "初始Vue",
+          introduce:
+            "想让Vue工作，就必须创建一个Vue实例，且要传入一个配置对象....",
+          authorAvatar: "logo",
+          authorName: "山野",
+          time: "2022/08/09",
+          tag: "Vue",
+        },
+        {
+          blogId: 4,
+          image: 3,
+          link: "/article",
+          title: "初始Vue",
+          introduce:
+            "想让Vue工作，就必须创建一个Vue实例，且要传入一个配置对象....",
+          authorAvatar: "logo",
+          authorName: "山野",
+          time: "2022/08/09",
+          tag: "Vue",
+        },
+      ],
+    };
+  },
 };
 </script>
 
