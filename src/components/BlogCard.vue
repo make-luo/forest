@@ -42,71 +42,9 @@
 <script>
 export default {
   name: "BlogCard",
+  props: ["blogCards"],
   data() {
-    return {
-      blogCards: [
-        {
-          blogId: 1,
-          image: 7,
-          link: "/article",
-          title: "初始Vue",
-          introduce:
-            "想让Vue工作，就必须创建一个Vue实例，且要传入一个配置对象....",
-          authorAvatar: "logo",
-          authorName: "山野",
-          time: "2022/08/09",
-          tag: "Vue",
-        },
-        {
-          blogId: 5,
-          image: 4,
-          link: "/article",
-          title: "初始Vue",
-          introduce:
-            "想让Vue工作，就必须创建一个Vue实例，且要传入一个配置对象....",
-          authorAvatar: "logo",
-          authorName: "山野",
-          time: "2022/08/09",
-          tag: "Vue",
-        },
-        {
-          blogId: 2,
-          image: 1,
-          link: "/article",
-          title: "初始Vue",
-          introduce:
-            "想让Vue工作，就必须创建一个Vue实例，且要传入一个配置对象....",
-          authorAvatar: "logo",
-          authorName: "山野",
-          time: "2022/08/09",
-          tag: "Vue",
-        },
-        {
-          blogId: 3,
-          image: 2,
-          link: "/article",
-          title: "初始Vue",
-          introduce:
-            "想让Vue工作，就必须创建一个Vue实例，且要传入一个配置对象....",
-          authorAvatar: "logo",
-          authorName: "山野",
-          time: "2022/08/09",
-          tag: "Vue",
-        },
-        {
-          blogId: 4,
-          image: 3,
-          link: "/article",
-          title: "初始Vue",
-          introduce:
-            "想让Vue工作，就必须创建一个Vue实例，且要传入一个配置对象....",
-          authorAvatar: "logo",
-          authorName: "山野",
-          time: "2022/08/09",
-          tag: "Vue",
-        },
-      ],
-    };
+    return {};
   },
 };
 </script>
@@ -123,13 +61,14 @@ export default {
     height: (300 / @rem);
     border-radius: (20 / @rem) (20 / @rem) 0px 0px;
     overflow: hidden;
-  }
-  .el-image {
-    transition: all 2s;
-    &:hover {
-      transform: scale(1.25, 1.25);
+    .el-image {
+      transition: all 2s;
+      &:hover {
+        transform: scale(1.25, 1.25);
+      }
     }
   }
+
   .card-content {
     padding: 0px (30 / @rem) 0px (70 / @rem);
     margin-bottom: (40 / @rem);

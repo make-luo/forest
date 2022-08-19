@@ -27,7 +27,7 @@ export default {
 @rem: 32rem;
 .comment-box {
   max-width: (1170 / @rem);
-  padding-top: (400 / @rem);
+  padding-top: (200 / @rem);
   margin: 0 auto;
 }
 </style>

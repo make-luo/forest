@@ -1,6 +1,6 @@
 <template>
   <div class="friend-box">
-    <div class="introduce"><span>👋🏼</span>和我一起做朋友吧</div>
+    <div class="introduce"><span class="hand">👋🏼</span>和我一起做朋友吧</div>
     <div class="one">
       <el-image :src="require('../assets/imgs/logo.png')"></el-image>
     </div>
@@ -26,7 +26,11 @@
     <div class="friend-list">
       <el-row>
         <el-col :xs="6" :sm="6" v-for="card in cards" :key="card.id">
-          <el-link href="https://element.eleme.io" :underline="false" target="_blank">
+          <el-link
+            href="https://element.eleme.io"
+            :underline="false"
+            target="_blank"
+          >
             <FriendCardVue :card="card"></FriendCardVue
           ></el-link>
         </el-col>
@@ -115,6 +119,11 @@ export default {
     line-height: (90 / @rem);
     font-size: (25 / @rem);
     background-color: #fff;
+    .hand {
+      margin-right: (20/@rem);
+      display: inline-block;
+      animation: round 0.8s linear infinite alternate;
+    }
   }
   .format {
     width: (500 / @rem);
@@ -159,6 +168,14 @@ export default {
         padding: (5 / @rem);
       }
     }
+  }
+}
+@keyframes round {
+  0% {
+    transform: rotate(45deg);
+  }
+  100% {
+    transform: rotate(-45deg);
   }
 }
 </style>

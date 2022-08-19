@@ -35,7 +35,7 @@ export default {
 .comment-box {
   max-width: (1170 / @rem);
   margin: 0 auto;
-  padding-top: (400 / @rem);
+  padding-top: (200 / @rem);
   font-size: (20 / @rem);
 }
 </style>

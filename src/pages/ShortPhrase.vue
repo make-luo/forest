@@ -30,7 +30,7 @@ export default {
 @rem: 32rem;
 .shortContrainer {
   max-width: (1170 / @rem);
-  padding-top: (400 / @rem);
+  padding-top: (200 / @rem);
   margin: 0 auto;
   font-size: (20 / @rem);
 }

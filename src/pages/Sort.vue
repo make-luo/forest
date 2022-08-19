@@ -6,13 +6,14 @@
           <el-button round class="sort">{{ sort.sortName }}</el-button>
         </el-col>
       </div>
-      <BlogCard class="blogcard"></BlogCard>
+      <BlogCard class="blogcard" :blogCards="blogCards"></BlogCard>
     </div>
   </div>
 </template>
 
 <script>
 import BlogCard from "../components/BlogCard";
+
 export default {
   name: "Sort",
   data() {
@@ -47,7 +48,68 @@ export default {
           sortName: "书籍",
         },
       ],
-      blogs: [],
+      blogCards: [
+        {
+          blogId: 1,
+          image: 7,
+          link: "/article",
+          title: "初始Vue",
+          introduce:
+            "想让Vue工作，就必须创建一个Vue实例，且要传入一个配置对象....",
+          authorAvatar: "logo",
+          authorName: "山野",
+          time: "2022/08/09",
+          tag: "Vue",
+        },
+        {
+          blogId: 5,
+          image: 4,
+          link: "/article",
+          title: "初始Vue",
+          introduce:
+            "想让Vue工作，就必须创建一个Vue实例，且要传入一个配置对象....",
+          authorAvatar: "logo",
+          authorName: "山野",
+          time: "2022/08/09",
+          tag: "Vue",
+        },
+        {
+          blogId: 2,
+          image: 1,
+          link: "/article",
+          title: "初始Vue",
+          introduce:
+            "想让Vue工作，就必须创建一个Vue实例，且要传入一个配置对象....",
+          authorAvatar: "logo",
+          authorName: "山野",
+          time: "2022/08/09",
+          tag: "Vue",
+        },
+        {
+          blogId: 3,
+          image: 2,
+          link: "/article",
+          title: "初始Vue",
+          introduce:
+            "想让Vue工作，就必须创建一个Vue实例，且要传入一个配置对象....",
+          authorAvatar: "logo",
+          authorName: "山野",
+          time: "2022/08/09",
+          tag: "Vue",
+        },
+        {
+          blogId: 4,
+          image: 3,
+          link: "/article",
+          title: "初始Vue",
+          introduce:
+            "想让Vue工作，就必须创建一个Vue实例，且要传入一个配置对象....",
+          authorAvatar: "logo",
+          authorName: "山野",
+          time: "2022/08/09",
+          tag: "Vue",
+        },
+      ],
     };
   },
   components: {
@@ -61,7 +123,7 @@ export default {
 .sortContainer {
   max-width: (1170 / @rem);
   margin: 0 auto;
-  padding-top: (400 / @rem);
+  padding-top: (200 / @rem);
   font-size: (20 / @rem);
   .sortList {
     display: flex;
@@ -72,8 +134,8 @@ export default {
     border-radius: (30 / @rem);
     padding: (40 / @rem);
   }
-  .blogcard{
-        margin: (50 / @rem);
+  .blogcard {
+    margin: (50 / @rem);
   }
 }
 </style>
