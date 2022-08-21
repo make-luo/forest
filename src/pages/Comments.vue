@@ -1,10 +1,19 @@
 <template>
   <div class="comment-box">
-    <Introduce :title="title" :content="content"></Introduce>
-    <MessageBox v-show="show"></MessageBox>
-    <CommentArea>
-      <MessageBox></MessageBox>
-    </CommentArea>
+    <div class="webcomment hidden-sm-and-down">
+      <Introduce :title="title" :content="content"></Introduce>
+      <MessageBox v-show="show"></MessageBox>
+      <CommentArea>
+        <MessageBox></MessageBox>
+      </CommentArea>
+    </div>
+    <div class="modilecomment hidden-md-and-up">
+      <Introduce :title="title" :content="content"></Introduce>
+      <MessageBox v-show="show"></MessageBox>
+      <CommentArea>
+        <MessageBox></MessageBox>
+      </CommentArea>
+    </div>
   </div>
 </template>
 
@@ -32,10 +41,17 @@ export default {
 
 <style lang="less" scoped>
 @rem: 32rem;
-.comment-box {
+.webcomment {
   max-width: (1170 / @rem);
   margin: 0 auto;
   padding-top: (200 / @rem);
   font-size: (20 / @rem);
+}
+.modilecomment {
+  max-width: (1250 / @rem);
+  min-width: 375px;
+  margin: 0 auto;
+  padding-top: (200 / @rem);
+  font-size: 16px;
 }
 </style>

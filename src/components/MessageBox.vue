@@ -1,61 +1,100 @@
 <template>
   <div>
     <CommentCardVue></CommentCardVue>
-    <el-row>
-      <el-col :md="24">
-        <div class="message-box">
-          <div class="user-info">
-            <span>昵称:</span
-            ><el-input v-model="input" placeholder="请输入昵称"></el-input>
-            <span>邮箱:</span
-            ><el-input v-model="input" placeholder="请输入邮箱"></el-input>
-          </div>
-          <div class="line"></div>
-          <el-input
-            type="textarea"
-            :autosize="{ minRows: 6 }"
-            placeholder="请输入内容"
-            v-model="content"
+    <div class="webmessage-box hidden-sm-and-down">
+      <div class="user-info">
+        <span>昵称:</span
+        ><el-input v-model="name" placeholder="请输入昵称"></el-input>
+        <span>邮箱:</span
+        ><el-input v-model="email" placeholder="请输入邮箱"></el-input>
+      </div>
+      <div class="line"></div>
+      <el-input
+        type="textarea"
+        :autosize="{ minRows: 6 }"
+        placeholder="请输入内容"
+        v-model="content"
+      >
+      </el-input>
+      <div v-show="show">
+        <span class="preshow">预览：</span>
+        <mavon-editor
+          class="preview"
+          :value="content"
+          :toolbarsFlag="false"
+          :html="false"
+          :subfield="false"
+          :boxShadow="false"
+          defaultOpen="preview"
+        ></mavon-editor>
+      </div>
+      <div class="operate-box">
+        <div class="operate">
+          <el-link
+            :underline="false"
+            href="https://github.com/hinesboy/mavonEditor"
           >
-          </el-input>
-          <div v-show="show">
-            <span class="preshow">预览：</span>
-            <mavon-editor
-              class="preview"
-              :value="content"
-              :toolbarsFlag="false"
-              :html="false"
-              :subfield="false"
-              :boxShadow="false"
-              defaultOpen="preview"
-            ></mavon-editor>
-          </div>
-          <div class="operate-box">
-            <div class="operate">
-              <el-link
-                :underline="false"
-                href="https://github.com/hinesboy/mavonEditor"
-              >
-                <el-button type="primary" icon="el-icon-edit" circle></el-button
-              ></el-link>
-              <el-button
-                icon="el-icon-search"
-                circle
-                @click="display"
-              ></el-button>
-            </div>
-            <div class="content-info">
-              <span>{{ length }}/130</span>
-              <el-button
-                round
-                @click="submit"
-                icon="el-icon-position"
-              ></el-button>
-            </div>
-          </div>
+            <el-button type="primary" icon="el-icon-edit" circle></el-button
+          ></el-link>
+          <el-button icon="el-icon-search" circle @click="display"></el-button>
         </div>
-      </el-col>
-    </el-row>
+        <div class="content-info">
+          <span>{{ length }}/130</span>
+          <el-button round @click="submit" icon="el-icon-position"></el-button>
+        </div>
+      </div>
+    </div>
+    <div class="modilemessage-box hidden-md-and-up">
+      <div class="user-info">
+        <span>昵称:</span
+        ><el-input
+          v-model="name"
+          placeholder="请输入昵称"
+          name="name"
+        ></el-input>
+        <span>邮箱:</span
+        ><el-input
+          v-model="email"
+          placeholder="请输入邮箱"
+          name="email"
+        ></el-input>
+      </div>
+      <div class="line"></div>
+      <el-input
+        type="textarea"
+        :autosize="{ minRows: 6 }"
+        placeholder="请输入内容"
+        v-model="content"
+      >
+      </el-input>
+      <div v-show="show">
+        <span class="preshow">预览：</span>
+        <mavon-editor
+          class="preview"
+          :value="content"
+          :toolbarsFlag="false"
+          :html="false"
+          :subfield="false"
+          :boxShadow="false"
+          defaultOpen="preview"
+        ></mavon-editor>
+      </div>
+      <div class="operate-box">
+        <div class="operate">
+          <el-link
+            :underline="false"
+            href="https://github.com/hinesboy/mavonEditor"
+          >
+            <el-button type="primary" icon="el-icon-edit" circle></el-button
+          ></el-link>
+          <el-button icon="el-icon-search" circle @click="display"></el-button>
+        </div>
+        <div class="content-info">
+          <span>{{ length }}/130</span>
+          <el-button round @click="submit" icon="el-icon-position"></el-button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -69,7 +108,8 @@ export default {
     return {
       content: "",
       show: false,
-      input: "",
+      name: "",
+      email: "",
     };
   },
   components: {
@@ -112,7 +152,7 @@ export default {
 
 <style lang="less" scoped>
 @rem: 32rem;
-.message-box {
+.webmessage-box {
   margin: (50 / @rem);
   padding: (60 / @rem);
   background-color: #fff;
@@ -175,6 +215,66 @@ export default {
         padding: 0;
         margin: 0;
         font-size: (20 / @rem);
+        text-align: center;
+        color: #fff;
+        background-color: #4b92a5;
+      }
+    }
+  }
+}
+.modilemessage-box {
+  margin: 11px 0px;
+  padding: 13px;
+  background-color: #fff;
+  border-radius: 10px;
+  .user-info {
+    text-align: left;
+    .el-input {
+      font-size: 16px;
+      background-color: #f5f5f5;
+    }
+  }
+  .line {
+    border-bottom: 1px dashed #4b92a5;
+    margin: 5px 0;
+  }
+  .preview {
+    min-width: 275px;
+  }
+  .preview {
+    min-height: 16px;
+  }
+  .preshow {
+    font-size: 16px;
+  }
+  .operate-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8.6px;
+    .operate {
+      display: flex;
+      align-items: flex-end;
+      .el-button {
+        width: 40px;
+        height: 40px;
+        margin: 0;
+        padding: 0;
+        font-size: 16px;
+        color: #fff;
+        margin-left: 4px;
+        background-color: #4b92a5;
+      }
+    }
+    .content-info {
+      span {
+        margin-right: 10px;
+      }
+      .el-button {
+        font-size: 16px;
+        width: 50px;
+        padding: 10px 0px;
+        margin: 0;
         text-align: center;
         color: #fff;
         background-color: #4b92a5;

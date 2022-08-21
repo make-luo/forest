@@ -12,13 +12,10 @@ export default {
 
 <style lang="less" scoped>
 @rem: 32;
-.loadcontainer {
-
+.el-button {
+  font-size: (20 / @rem);
 }
-  .el-button {
-    font-size: (20 / @rem);
-  }
-  .el-button--primary{
-    background-color: #4b92a5;
-  }
+.el-button--primary {
+  background-color: #4b92a5;
+}
 </style>

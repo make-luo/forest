@@ -1,27 +1,58 @@
 <template>
   <div class="articleContainer">
-    <div class="articleImg">
-      <el-image :src="require(`../assets/imgs/7.png`)" fit="cover"></el-image>
-    </div>
-    <div class="articleTitle">
-      <div class="describe">
-        <span class="round"></span>
-        <span>title</span>
+    <div class="webarticleContainer hidden-sm-and-down">
+      <div class="articleImg">
+        <el-image :src="require(`../assets/imgs/7.png`)" fit="cover"></el-image>
       </div>
-      <el-image :src="require(`../assets/imgs/underline.png`)"></el-image>
+      <div class="articleTitle">
+        <div class="describe">
+          <span class="round"></span>
+          <span>初识Vue</span>
+        </div>
+        <el-image :src="require(`../assets/imgs/underline.png`)"></el-image>
+      </div>
+      <mavon-editor
+        class="preview"
+        :value="value"
+        :toolbarsFlag="false"
+        :html="false"
+        :subfield="false"
+        :boxShadow="false"
+        defaultOpen="preview"
+      ></mavon-editor>
+      <div class="article-info">
+        <div class="short">
+          <span class="el-icon-collection-tag"></span> Vue
+        </div>
+        <div class="time"><span>发表时间:</span>2022/8/13</div>
+      </div>
     </div>
-    <mavon-editor
-      class="preview"
-      :value="value"
-      :toolbarsFlag="false"
-      :html="false"
-      :subfield="false"
-      :boxShadow="false"
-      defaultOpen="preview"
-    ></mavon-editor>
-    <div class="article-info">
-      <div class="short"><span class="el-icon-collection-tag"></span> Vue</div>
-      <div class="time"><span>发表时间:</span>2022/8/13</div>
+    <div class="modilearticleContainer hidden-md-and-up">
+      <div class="articleImg">
+        <el-image :src="require(`../assets/imgs/7.png`)" fit="cover"></el-image>
+      </div>
+      <div class="articleTitle">
+        <div class="describe">
+          <span class="round"></span>
+          <span>初识Vue</span>
+        </div>
+        <el-image :src="require(`../assets/imgs/underline.png`)"></el-image>
+      </div>
+      <mavon-editor
+        class="preview"
+        :value="value"
+        :toolbarsFlag="false"
+        :html="false"
+        :subfield="false"
+        :boxShadow="false"
+        defaultOpen="preview"
+      ></mavon-editor>
+      <div class="article-info">
+        <div class="short">
+          <span class="el-icon-collection-tag"></span> Vue
+        </div>
+        <div class="time"><span>发表时间:</span>2022/8/13</div>
+      </div>
     </div>
   </div>
 </template>
@@ -51,7 +82,7 @@ export default {
 <style lang="less" scoped>
 @rem: 32rem;
 
-.articleContainer {
+.webarticleContainer {
   margin: 0 (50 / @rem);
   background-color: #fbfbfb;
   border-radius: (50 / @rem);
@@ -87,6 +118,48 @@ export default {
     align-items: center;
     border-top: 1px dashed #4b92a5;
     font-size: (20 / @rem);
+    .el-icon-collection-tag {
+      color: #4b92a5;
+    }
+  }
+}
+.modilearticleContainer {
+  background-color: #fbfbfb;
+  border-radius: 10px;
+  .articleImg {
+    .el-image {
+      width: 100%;
+      height: 210px;
+      border-radius: 10px 10px 0 0;
+    }
+  }
+  .articleTitle {
+    .describe {
+      font-size: 20px;
+      .round {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        margin-right: 5px;
+        background-color: #4b92a5;
+      }
+    }
+  }
+  .preview {
+    font-size: 16px;
+    min-width: 100%;
+    min-height: 100px;
+    z-index: 98;
+  }
+  .article-info {
+    min-height: 40px;
+    padding: 0 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px dashed #4b92a5;
+    font-size: 14px;
     .el-icon-collection-tag {
       color: #4b92a5;
     }

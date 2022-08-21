@@ -1,8 +1,16 @@
 <template>
-  <div class="shortcard">
-    <div class="card" v-for="card in cards" :key="card.id">
-      <el-divider class="time">{{ card.time }}</el-divider>
-      <div class="content">{{ card.content }}</div>
+  <div class="shortcontainer">
+    <div class="webshortcard hidden-sm-and-down">
+      <div class="card" v-for="card in cards" :key="card.id">
+        <el-divider class="time">{{ card.time }}</el-divider>
+        <div class="content">{{ card.content }}</div>
+      </div>
+    </div>
+    <div class="modileshortcard hidden-md-and-up">
+      <div class="card" v-for="card in cards" :key="card.id">
+        <el-divider class="time">{{ card.time }}</el-divider>
+        <div class="content">{{ card.content }}</div>
+      </div>
     </div>
   </div>
 </template>
@@ -41,7 +49,7 @@ export default {
 
 <style lang="less" scoped>
 @rem: 32rem;
-.shortcard {
+.webshortcard {
   background-color: #fff;
   padding: (40 / @rem);
   margin: (50 / @rem);
@@ -52,6 +60,23 @@ export default {
     margin: (10 / @rem);
     padding: (10 / @rem);
     border-radius: (30 / @rem);
+    background-color: #eceff3;
+  }
+  .time {
+    background-color: #4b92a5;
+  }
+}
+.modileshortcard {
+  background-color: #fff;
+  padding: 8.6px;
+  margin: 10px 0px ;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  .card {
+    margin: 2px;
+    padding: 2px;
+    border-radius: 5px;
     background-color: #eceff3;
   }
   .time {

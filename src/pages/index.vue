@@ -106,7 +106,8 @@ export default {
 <style lang="less" scoped>
 @rem: 32rem;
 .container {
-  max-width: (1255 / @rem);
+  max-width: (1250/@rem);
+  min-width: 375px;
   margin: 0 auto;
 }
 </style>

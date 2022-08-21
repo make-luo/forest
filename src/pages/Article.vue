@@ -1,10 +1,19 @@
 <template>
-  <div class="comment-box">
-    <ShowArticle></ShowArticle>
-    <MessageBox> </MessageBox>
-    <CommentArea>
-      <MessageBox></MessageBox>
-    </CommentArea>
+  <div class="commentcontainer">
+    <div class="webcomment-box hidden-sm-and-down">
+      <ShowArticle></ShowArticle>
+      <MessageBox> </MessageBox>
+      <CommentArea>
+        <MessageBox></MessageBox>
+      </CommentArea>
+    </div>
+    <div class="modilecomment-box hidden-md-and-up">
+      <ShowArticle></ShowArticle>
+      <MessageBox> </MessageBox>
+      <CommentArea>
+        <MessageBox></MessageBox>
+      </CommentArea>
+    </div>
   </div>
 </template>
 
@@ -25,9 +34,14 @@ export default {
 
 <style lang="less" scoped>
 @rem: 32rem;
-.comment-box {
+.webcomment-box {
   max-width: (1170 / @rem);
   padding-top: (200 / @rem);
+  margin: 0 auto;
+}
+.modilecomment-box {
+  max-width: (1250/@rem);
+  min-width: 375px;
   margin: 0 auto;
 }
 </style>

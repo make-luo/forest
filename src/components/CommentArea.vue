@@ -1,7 +1,79 @@
 <template>
   <div class="area-box">
     <h1>2条评论</h1>
-    <div class="commentlist">
+    <div class="webcommentlist hidden-sm-and-down">
+      <div
+        class="comment"
+        v-for="comment in commentlist"
+        :key="comment.commentId"
+      >
+        <div class="main-comment">
+          <div class="leader-info">
+            <el-image
+              :src="require(`../assets/imgs/${comment.avatar}.png`)"
+              fit="cover"
+            ></el-image>
+            <div class="messageinfo">
+              <div class="name">
+                {{ comment.name }} <span v-show="comment.webmaster">站长</span>
+                <i class="time">{{ comment.time }}</i>
+              </div>
+              <div class="content">
+                <span v-show="false"></span>{{ comment.content }}
+              </div>
+            </div>
+          </div>
+          <el-button
+            class="replay-buttom"
+            icon="el-icon-s-promotion"
+            circle
+            @click="comment.showReplay = !comment.showReplay"
+          ></el-button>
+        </div>
+        <div v-show="comment.showReplay">
+          <slot></slot>
+        </div>
+        <div class="replay-list">
+          <div
+            class="replay-comment"
+            v-for="replay_comment in comment.replayList"
+            :key="replay_comment.replayId"
+          >
+            <div class="user">
+              <div class="user-info">
+                <el-image
+                  :src="require(`../assets/imgs/${replay_comment.avatar}.png`)"
+                  fit="cover"
+                ></el-image>
+                <div class="messageinfo">
+                  <span class="name"
+                    >{{ replay_comment.name
+                    }}<span v-show="replay_comment.webmaster">站长</span>
+                    <i class="time">{{ replay_comment.time }}</i>
+                  </span>
+                  <p class="content">
+                    <span v-show="replay_comment.replay"
+                      >@{{ replay_comment.replay_object }}：</span
+                    >{{ replay_comment.content }}
+                  </p>
+                </div>
+              </div>
+              <el-button
+                class="replay-buttom"
+                icon="el-icon-s-promotion"
+                circle
+                @click="replay_comment.showReplay = !replay_comment.showReplay"
+              ></el-button>
+            </div>
+
+            <div v-show="replay_comment.showReplay">
+              <slot></slot>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modilecommentlist hidden-md-and-up">
       <div
         class="comment"
         v-for="comment in commentlist"
@@ -163,7 +235,6 @@ export default {
 <style lang="less" scoped>
 @rem: 32rem;
 .area-box {
-  margin:0 (50 / @rem);
   display: flex;
   flex-direction: column;
   border-radius: (40 / @rem);
@@ -171,9 +242,9 @@ export default {
   background-color: #fff;
   h1 {
     text-align: left;
-    font-size: (35 / @rem);
+    font-size: 30px;
   }
-  .commentlist {
+  .webcommentlist {
     display: flex;
     align-content: center;
     flex-direction: column;
@@ -185,89 +256,186 @@ export default {
         background-color: #eceff3;
       }
     }
-  }
-}
+    .main-comment,
+    .replay-comment {
+      margin-top: (30 / @rem);
+      .el-button {
+        margin: 0;
+        padding: 0;
+        width: (40 / @rem);
+        height: (40 / @rem);
+        color: #fff;
+        background-color: #4b92a5;
+      }
+      .leader-info {
+        display: flex;
+        align-items: flex-start;
+      }
+      .user-info {
+        display: flex;
+        align-items: flex-start;
+      }
+      .el-image {
+        width: (52 / @rem);
+        height: (52 / @rem);
+        border-radius: 50%;
+      }
+      .messageinfo {
+        display: flex;
+        flex-direction: column;
+        margin-left: (20 / @rem);
+        .time {
+          font-style: normal;
+          font-size: (15 / @rem);
+          font-weight: 100;
+          margin-left: (10 / @rem);
+          color: #424242;
+        }
+        .name {
+          display: flex;
+          align-items: center;
+          font-size: (20 / @rem);
+          color: #4b92a5;
+          font-weight: 900;
+          span {
+            display: inline-block;
+            width: (45 / @rem);
+            height: (20 / @rem);
+            margin-left: (10 / @rem);
+            line-height: (20 / @rem);
+            border-radius: (8 / @rem);
+            font-size: (15 / @rem);
+            color: #fff;
+            background-color: #4b92a5;
+          }
+        }
+        .content {
+          width: (720 / @rem);
+          text-align: left;
+          font-size: (15 / @rem);
+          span {
+            color: #4b92a5;
+          }
+        }
+      }
 
-.main-comment,
-.replay-comment {
-  margin-top: (30 / @rem);
-  .el-button {
-    margin: 0;
-    padding: 0;
-    width: (40 / @rem);
-    height: (40 / @rem);
-    color: #fff;
-    background-color: #4b92a5;
-  }
-  .leader-info {
-    display: flex;
-    align-items: flex-start;
-  }
-  .user-info {
-    display: flex;
-    align-items: flex-start;
-  }
-  .el-image {
-    width: (52 / @rem);
-    height: (52 / @rem);
-    border-radius: 50%;
-  }
-  .messageinfo {
-    display: flex;
-    flex-direction: column;
-    margin-left: (20 / @rem);
-    .time {
-      font-style: normal;
-      font-size: (15 / @rem);
-      font-weight: 100;
-      margin-left: (10 / @rem);
-      color: #424242;
-    }
-    .name {
-      display: flex;
-      align-items: center;
-      font-size: (20 / @rem);
-      color: #4b92a5;
-      font-weight: 900;
-      span {
-        display: inline-block;
-        width: (45 / @rem);
-        height: (20 / @rem);
-        margin-left: (10 / @rem);
-        line-height: (20 / @rem);
-        border-radius: (8 / @rem);
+      .replay-buttom {
         font-size: (15 / @rem);
         color: #fff;
         background-color: #4b92a5;
       }
     }
-    .content {
-      width: (720 / @rem);
-      text-align: left;
-      font-size: (15 / @rem);
-      span {
-        color: #4b92a5;
+    .main-comment {
+      display: flex;
+      justify-content: space-between;
+    }
+    .replay-comment {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      .user {
+        display: flex;
+        justify-content: space-between;
       }
     }
   }
-
-  .replay-buttom {
-    font-size: (15 / @rem);
-    color: #fff;
-    background-color: #4b92a5;
-  }
-}
-.main-comment {
-  display: flex;
-  justify-content: space-between;
-}
-.replay-comment {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  .user {
+  .modilecommentlist {
     display: flex;
-    justify-content: space-between;
+    align-content: center;
+    flex-direction: column;
+    .comment{
+      margin-bottom: 10px;
+    }
+    .replay-list {
+      margin-left: 15px;
+      .replay-comment {
+        padding: 3px;
+        border-radius: 4px;
+        background-color: #eceff3;
+      }
+    }
+    .main-comment,
+    .replay-comment {
+      margin-top: 6.5px;
+      .el-button {
+        margin: 0;
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        color: #fff;
+        background-color: #4b92a5;
+      }
+      .leader-info {
+        display: flex;
+        align-items: flex-start;
+      }
+      .user-info {
+        display: flex;
+        align-items: flex-start;
+      }
+      .el-image {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+      }
+      .messageinfo {
+        display: flex;
+        flex-direction: column;
+        margin-left: 4.5px;
+        .time {
+          font-style: normal;
+          font-size: 14px;
+          font-weight: 100;
+          margin-left: 3px;
+          color: #424242;
+        }
+        .name {
+          display: flex;
+          align-items: center;
+          font-size: 18px;
+          color: #4b92a5;
+          font-weight: 900;
+          span {
+            display: inline-block;
+            width: 30px;
+            height: 20px;
+            margin-left: 10px;
+            line-height: 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #fff;
+            background-color: #4b92a5;
+          }
+        }
+        .content {
+          width: 250px;
+          text-align: left;
+          font-size: 18px;
+          span {
+            color: #4b92a5;
+          }
+        }
+      }
+
+      .replay-buttom {
+        font-size: 15px;
+        color: #fff;
+        background-color: #4b92a5;
+      }
+    }
+    .main-comment {
+      display: flex;
+      justify-content: space-between;
+    }
+    .replay-comment {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      .user {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
   }
 }
 </style>

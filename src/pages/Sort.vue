@@ -1,19 +1,34 @@
 <template>
   <div class="sortContainer">
-    <div class="sortbox">
-      <div class="sortList">
-        <el-col :lg="4" :sm="6" v-for="sort in sortList" :key="sort.sortId">
-          <el-button round class="sort">{{ sort.sortName }}</el-button>
-        </el-col>
+    <div class="websort hidden-sm-and-down">
+      <div class="sortbox">
+        <div class="sortList">
+          <el-col :lg="4" :sm="6" v-for="sort in sortList" :key="sort.sortId">
+            <el-button round class="sort">{{ sort.sortName }}</el-button>
+          </el-col>
+        </div>
+        <BlogCard class="blogcard" :blogCards="blogCards"></BlogCard>
       </div>
-      <BlogCard class="blogcard" :blogCards="blogCards"></BlogCard>
+    </div>
+    <div class="modilesort hidden-md-and-up">
+      <div class="sortbox">
+        <div class="sortList">
+          <el-row>
+            <el-col :xs="6" :sm="4" v-for="sort in sortList" :key="sort.sortId">
+              <el-button round class="sort">{{ sort.sortName }}</el-button>
+            </el-col></el-row
+          >
+        </div>
+        <BlogCard class="blogcard" :blogCards="blogCards"></BlogCard>
+        <LoadMore></LoadMore>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import BlogCard from "../components/BlogCard";
-
+import LoadMore from "../components/LoadMore.vue";
 export default {
   name: "Sort",
   data() {
@@ -114,14 +129,15 @@ export default {
   },
   components: {
     BlogCard,
+    LoadMore,
   },
 };
 </script>
 
 <style lang="less" scoped>
 @rem: 32rem;
-.sortContainer {
-  max-width: (1170 / @rem);
+.websort {
+  max-width: (1250 / @rem);
   margin: 0 auto;
   padding-top: (200 / @rem);
   font-size: (20 / @rem);
@@ -136,6 +152,24 @@ export default {
   }
   .blogcard {
     margin: (50 / @rem);
+  }
+}
+.modilesort {
+  max-width: (1250 / @rem);
+  min-width: 375px;
+  margin: 0 auto;
+  padding-top: (200 / @rem);
+  font-size: (20 / @rem);
+  .sortList {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    background-color: #fff;
+    border-radius: (30 / @rem);
+    margin: 30px 0px ;
+    .sort{
+      margin: 5px 0px;
+    }
   }
 }
 </style>
