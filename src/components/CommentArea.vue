@@ -1,145 +1,160 @@
 <template>
-  <div class="area-box">
-    <h1>2条评论</h1>
-    <div class="webcommentlist hidden-sm-and-down">
-      <div
-        class="comment"
-        v-for="comment in commentlist"
-        :key="comment.commentId"
-      >
-        <div class="main-comment">
-          <div class="leader-info">
-            <el-image
-              :src="require(`../assets/imgs/${comment.avatar}.png`)"
-              fit="cover"
-            ></el-image>
-            <div class="messageinfo">
-              <div class="name">
-                {{ comment.name }} <span v-show="comment.webmaster">站长</span>
-                <i class="time">{{ comment.time }}</i>
-              </div>
-              <div class="content">
-                <span v-show="false"></span>{{ comment.content }}
-              </div>
-            </div>
-          </div>
-          <el-button
-            class="replay-buttom"
-            icon="el-icon-s-promotion"
-            circle
-            @click="comment.showReplay = !comment.showReplay"
-          ></el-button>
-        </div>
-        <div v-show="comment.showReplay">
-          <slot></slot>
-        </div>
-        <div class="replay-list">
-          <div
-            class="replay-comment"
-            v-for="replay_comment in comment.replayList"
-            :key="replay_comment.replayId"
-          >
-            <div class="user">
-              <div class="user-info">
-                <el-image
-                  :src="require(`../assets/imgs/${replay_comment.avatar}.png`)"
-                  fit="cover"
-                ></el-image>
-                <div class="messageinfo">
-                  <span class="name"
-                    >{{ replay_comment.name
-                    }}<span v-show="replay_comment.webmaster">站长</span>
-                    <i class="time">{{ replay_comment.time }}</i>
-                  </span>
-                  <p class="content">
-                    <span v-show="replay_comment.replay"
-                      >@{{ replay_comment.replay_object }}：</span
-                    >{{ replay_comment.content }}
-                  </p>
+  <div class="commentcontainer">
+    <div class="webarea-box hidden-sm-and-down">
+      <h1>2条评论</h1>
+      <div class="commentlist">
+        <div
+          class="comment"
+          v-for="comment in commentlist"
+          :key="comment.commentId"
+        >
+          <div class="main-comment">
+            <div class="leader-info">
+              <el-image
+                :src="require(`../assets/imgs/${comment.avatar}.png`)"
+                fit="cover"
+              ></el-image>
+              <div class="messageinfo">
+                <div class="name">
+                  {{ comment.name }}
+                  <span v-show="comment.webmaster">站长</span>
+                  <i class="time">{{ comment.time }}</i>
+                </div>
+                <div class="content">
+                  <span v-show="false"></span>{{ comment.content }}
                 </div>
               </div>
-              <el-button
-                class="replay-buttom"
-                icon="el-icon-s-promotion"
-                circle
-                @click="replay_comment.showReplay = !replay_comment.showReplay"
-              ></el-button>
             </div>
+            <el-button
+              class="replay-buttom"
+              icon="el-icon-s-promotion"
+              circle
+              @click="comment.showReplay = !comment.showReplay"
+            ></el-button>
+          </div>
+          <div v-show="comment.showReplay">
+            <slot></slot>
+          </div>
+          <div class="replay-list">
+            <div
+              class="replay-comment"
+              v-for="replay_comment in comment.replayList"
+              :key="replay_comment.replayId"
+            >
+              <div class="user">
+                <div class="user-info">
+                  <el-image
+                    :src="
+                      require(`../assets/imgs/${replay_comment.avatar}.png`)
+                    "
+                    fit="cover"
+                  ></el-image>
+                  <div class="messageinfo">
+                    <span class="name"
+                      >{{ replay_comment.name
+                      }}<span v-show="replay_comment.webmaster">站长</span>
+                      <i class="time">{{ replay_comment.time }}</i>
+                    </span>
+                    <p class="content">
+                      <span v-show="replay_comment.replay"
+                        >@{{ replay_comment.replay_object }}：</span
+                      >{{ replay_comment.content }}
+                    </p>
+                  </div>
+                </div>
+                <el-button
+                  class="replay-buttom"
+                  icon="el-icon-s-promotion"
+                  circle
+                  @click="
+                    replay_comment.showReplay = !replay_comment.showReplay
+                  "
+                ></el-button>
+              </div>
 
-            <div v-show="replay_comment.showReplay">
-              <slot></slot>
+              <div v-show="replay_comment.showReplay">
+                <slot></slot>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="modilecommentlist hidden-md-and-up">
-      <div
-        class="comment"
-        v-for="comment in commentlist"
-        :key="comment.commentId"
-      >
-        <div class="main-comment">
-          <div class="leader-info">
-            <el-image
-              :src="require(`../assets/imgs/${comment.avatar}.png`)"
-              fit="cover"
-            ></el-image>
-            <div class="messageinfo">
-              <div class="name">
-                {{ comment.name }} <span v-show="comment.webmaster">站长</span>
-                <i class="time">{{ comment.time }}</i>
-              </div>
-              <div class="content">
-                <span v-show="false"></span>{{ comment.content }}
-              </div>
-            </div>
-          </div>
-          <el-button
-            class="replay-buttom"
-            icon="el-icon-s-promotion"
-            circle
-            @click="comment.showReplay = !comment.showReplay"
-          ></el-button>
-        </div>
-        <div v-show="comment.showReplay">
-          <slot></slot>
-        </div>
-        <div class="replay-list">
-          <div
-            class="replay-comment"
-            v-for="replay_comment in comment.replayList"
-            :key="replay_comment.replayId"
-          >
-            <div class="user">
-              <div class="user-info">
-                <el-image
-                  :src="require(`../assets/imgs/${replay_comment.avatar}.png`)"
-                  fit="cover"
-                ></el-image>
-                <div class="messageinfo">
-                  <span class="name"
-                    >{{ replay_comment.name
-                    }}<span v-show="replay_comment.webmaster">站长</span>
-                    <i class="time">{{ replay_comment.time }}</i>
-                  </span>
-                  <p class="content">
-                    <span v-show="replay_comment.replay"
-                      >@{{ replay_comment.replay_object }}：</span
-                    >{{ replay_comment.content }}
-                  </p>
+    <div class="modilearea-box hidden-md-and-up">
+      <h1>2条评论</h1>
+      <div class="modilecommentlist">
+        <div
+          class="comment"
+          v-for="comment in commentlist"
+          :key="comment.commentId"
+        >
+          <div class="main-comment">
+            <div class="leader-info">
+              <el-image
+                :src="require(`../assets/imgs/${comment.avatar}.png`)"
+                fit="cover"
+              ></el-image>
+              <div class="messageinfo">
+                <div class="name">
+                  {{ comment.name }}
+                  <span v-show="comment.webmaster">站长</span>
+                  <i class="time">{{ comment.time }}</i>
+                </div>
+                <div class="content">
+                  <span v-show="false"></span>{{ comment.content }}
                 </div>
               </div>
-              <el-button
-                class="replay-buttom"
-                icon="el-icon-s-promotion"
-                circle
-                @click="replay_comment.showReplay = !replay_comment.showReplay"
-              ></el-button>
             </div>
+            <el-button
+              class="replay-buttom"
+              icon="el-icon-s-promotion"
+              circle
+              @click="comment.showReplay = !comment.showReplay"
+            ></el-button>
+          </div>
+          <div v-show="comment.showReplay">
+            <slot></slot>
+          </div>
+          <div class="replay-list">
+            <div
+              class="replay-comment"
+              v-for="replay_comment in comment.replayList"
+              :key="replay_comment.replayId"
+            >
+              <div class="user">
+                <div class="user-info">
+                  <el-image
+                    :src="
+                      require(`../assets/imgs/${replay_comment.avatar}.png`)
+                    "
+                    fit="cover"
+                  ></el-image>
+                  <div class="messageinfo">
+                    <span class="name"
+                      >{{ replay_comment.name
+                      }}<span v-show="replay_comment.webmaster">站长</span>
+                      <i class="time">{{ replay_comment.time }}</i>
+                    </span>
+                    <p class="content">
+                      <span v-show="replay_comment.replay"
+                        >@{{ replay_comment.replay_object }}：</span
+                      >{{ replay_comment.content }}
+                    </p>
+                  </div>
+                </div>
+                <el-button
+                  class="replay-buttom"
+                  icon="el-icon-s-promotion"
+                  circle
+                  @click="
+                    replay_comment.showReplay = !replay_comment.showReplay
+                  "
+                ></el-button>
+              </div>
 
-            <div v-show="replay_comment.showReplay">
-              <slot></slot>
+              <div v-show="replay_comment.showReplay">
+                <slot></slot>
+              </div>
             </div>
           </div>
         </div>
@@ -234,20 +249,22 @@ export default {
 
 <style lang="less" scoped>
 @rem: 32rem;
-.area-box {
+.webarea-box {
   display: flex;
   flex-direction: column;
   border-radius: (40 / @rem);
   padding: (48 / @rem) (71 / @rem);
+  margin: (50 / @rem);
   background-color: #fff;
   h1 {
     text-align: left;
     font-size: 30px;
   }
-  .webcommentlist {
+  .commentlist {
     display: flex;
     align-content: center;
     flex-direction: column;
+
     .replay-list {
       margin-left: (70 / @rem);
       .replay-comment {
@@ -339,11 +356,22 @@ export default {
       }
     }
   }
+}
+.modilearea-box {
+  display: flex;
+  flex-direction: column;
+  border-radius: (40 / @rem);
+  padding: (48 / @rem) (71 / @rem);
+  background-color: #fff;
+  h1 {
+    text-align: left;
+    font-size: 30px;
+  }
   .modilecommentlist {
     display: flex;
     align-content: center;
     flex-direction: column;
-    .comment{
+    .comment {
       margin-bottom: 10px;
     }
     .replay-list {
@@ -416,7 +444,6 @@ export default {
           }
         }
       }
-
       .replay-buttom {
         font-size: 15px;
         color: #fff;

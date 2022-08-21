@@ -199,6 +199,7 @@ export default {
   }
   .el-image {
     height: 100px;
+    width: 100px;
     border-radius: 50%;
     filter: blur(5px);
     transition: filter 1s;

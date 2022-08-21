@@ -166,6 +166,7 @@ export default {
   border-radius: 20px;
   color: #3e5b77;
   background-color: #fff;
+  margin-top: 30px;
   .img-box {
     width: 100%;
     height: 150px;

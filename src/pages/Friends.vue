@@ -32,7 +32,7 @@
               :underline="false"
               target="_blank"
             >
-              <FriendCardVue :card="card"></FriendCardVue
+              <FriendCard :card="card"></FriendCard
             ></el-link>
           </el-col>
         </el-row>
@@ -280,6 +280,9 @@ export default {
         padding: 2px;
       }
     }
+  }
+  .friend-list{
+    padding: 0px 10px;
   }
 }
 
