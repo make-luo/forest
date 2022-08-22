@@ -185,12 +185,12 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 20px;
+  font-size: 16px;
   background-color: #fff;
   padding:20px 30px ;
   margin-top:100px ;
   a {
-    font-size: 20px;
+    font-size: 16px;
     color: #666;
     text-decoration: none;
   }
@@ -198,8 +198,8 @@ export default {
     margin: 10px 0;
   }
   .el-image {
-    height: 100px;
-    width: 100px;
+    height: 50px;
+    width: 50px;
     border-radius: 50%;
     filter: blur(5px);
     transition: filter 1s;
@@ -209,9 +209,9 @@ export default {
   }
   .el-button {
     padding: 0;
-    width: 50px;
-    height: 50px;
-    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
     margin: 0;
     border-radius: 50%;
   }
