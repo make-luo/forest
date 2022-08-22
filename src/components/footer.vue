@@ -177,6 +177,7 @@ export default {
     height: (50 / @rem);
     font-size: (20 / @rem);
     border-radius: 50%;
+    margin: 0;
   }
 }
 

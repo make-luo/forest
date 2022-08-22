@@ -40,8 +40,9 @@ export default {
   margin: 0 auto;
 }
 .modilecomment-box {
-  max-width: (1250/@rem);
+  max-width: (1250 / @rem);
   min-width: 375px;
   margin: 0 auto;
+  font-size: 16px;
 }
 </style>
