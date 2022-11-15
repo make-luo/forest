@@ -80,6 +80,7 @@
         </div>
       </div>
     </div>
+
     <div class="modilearea-box hidden-md-and-up">
       <h1>2条评论</h1>
       <div class="modilecommentlist">
@@ -365,7 +366,7 @@ export default {
   background-color: #fff;
   h1 {
     text-align: left;
-    font-size: 30px;
+    font-size: 20px;
   }
   .modilecommentlist {
     display: flex;
@@ -400,6 +401,7 @@ export default {
       .user-info {
         display: flex;
         align-items: flex-start;
+        width: 80%;
       }
       .el-image {
         width: 35px;
@@ -420,7 +422,7 @@ export default {
         .name {
           display: flex;
           align-items: center;
-          font-size: 18px;
+          font-size: 15px;
           color: #4b92a5;
           font-weight: 900;
           span {
@@ -430,22 +432,22 @@ export default {
             margin-left: 10px;
             line-height: 20px;
             border-radius: 8px;
-            font-size: 14px;
+            font-size: 10px;
             color: #fff;
             background-color: #4b92a5;
           }
         }
         .content {
-          width: 250px;
+          width: 100%;
           text-align: left;
-          font-size: 18px;
+          font-size: 16px;
           span {
             color: #4b92a5;
           }
         }
       }
       .replay-buttom {
-        font-size: 15px;
+        font-size: 16px;
         color: #fff;
         background-color: #4b92a5;
       }

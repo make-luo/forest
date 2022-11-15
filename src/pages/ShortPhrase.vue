@@ -42,7 +42,7 @@ export default {
 }
 .mobileshort {
   max-width: (1250 / @rem);
-  min-width: 375px;
+  min-width: 320px;
   padding-top: (200 / @rem);
   margin: 0 auto;
   font-size: 16px;

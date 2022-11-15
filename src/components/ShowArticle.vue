@@ -64,8 +64,23 @@ export default {
   name: "ShowArticle",
   data() {
     return {
-      content:
-        "初识Vue 想让Vue工作，就必须创建一个Vue实例，且要传入一个配置对象 root容器中（div）的代码依然符合html规范，只不过混入了一些特殊的vue语法 root容器中的代码称为【vue模板】 vue实例和容器是一一对应的 真实开发中，只有一个vue实例 并且会配合着组件一起使用 {{XXX}}中的XXX要写js表达式，且XXX可以自动读到data中的所有属性 一旦data中的数据发生改变，那么页面中用到该数据的地方也会自动更新 js表达式和js代码 js表达式：一个表达式会产生一个值，可以放在任何一个需要值的地方 变量 a 变量之间做数学运算 a+b 函数调用 demo（1） 三目运算 x===y ? 'a':'b' js代码（语句） if(){} for (){} ",
+      content: `
+ @CrossOrigin(origins = "http://localhost:8081",maxAge = 3600)  //解决跨域问题
+ @Controller
+ public class SecurityController {
+  
+ @RequestMapping("/Login")
+     @ResponseBody
+     public HashMap<String, Object> Login( @RequestBody user user, Model model) {
+         String username = user.getName();
+         String password = user.getPassword();
+         HashMap<String, Object> userMap = new HashMap<>();
+         userMap.put("username",username);
+         userMap.put("password",password);
+         return userMap;
+     }
+ }
+`,
     };
   },
   components: {

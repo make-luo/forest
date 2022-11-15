@@ -213,7 +213,7 @@ export default {
 .modilefriend-box {
   position: relative;
   max-width: (1250 / @rem);
-  min-width: 375px;
+  min-width: 320px;
   margin: 0 auto;
   padding: 2px;
   .one {
@@ -282,7 +282,7 @@ export default {
     }
   }
   .friend-list{
-    padding: 0px 10px;
+
   }
 }
 

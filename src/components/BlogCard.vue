@@ -189,22 +189,21 @@ export default {
       align-items: flex-start;
       .title {
         padding-top: 10px;
-        font-size: 28px;
+        font-size: 20px;
       }
       .short {
-        width: 355px;
+        width: 300px;
         text-align: left;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
         padding-top: (15 / @rem);
-        font-size: 16px;
+        font-size: 10px;
       }
     }
     .author {
       display: flex;
       align-items: center;
-
       font-size: 12px;
       .el-image {
         width: 30px;

@@ -107,7 +107,7 @@ export default {
 @rem: 32rem;
 .container {
   max-width: (1250/@rem);
-  min-width: 375px;
+  min-width: 320px;
   margin: 0 auto;
 }
 </style>
