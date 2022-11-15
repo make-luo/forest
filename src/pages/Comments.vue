@@ -49,7 +49,7 @@ export default {
 }
 .modilecomment {
   max-width: (1250 / @rem);
-  min-width: 320px;
+  min-width: 96%;
   margin: 0 auto;
   padding-top: (200 / @rem);
   font-size: 16px;

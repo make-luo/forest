@@ -1,7 +1,22 @@
 <template>
   <div id="app">
     <Top></Top>
-    <div class="container">
+    <div class="webcontainer hidden-sm-and-down">
+      <el-row :gutter="25">
+        <el-col :md="24" :lg="16">
+          <!-- 博客列表 -->
+          <BlogCard :blogCards="blogCards"></BlogCard>
+          <LoadMore></LoadMore>
+        </el-col>
+        <el-col class="hidden-md-and-down" :lg="8">
+          <el-row>
+            <el-col :lg="24"><AuthorInfo></AuthorInfo></el-col>
+            <el-col :lg="24"> <NewMessage></NewMessage> </el-col>
+          </el-row>
+        </el-col>
+      </el-row>
+    </div>
+    <div class="modelcontainer hidden-md-and-up">
       <el-row :gutter="25">
         <el-col :md="24" :lg="16">
           <!-- 博客列表 -->
@@ -25,6 +40,7 @@ import BlogCard from "../components/BlogCard";
 import AuthorInfo from "../components/AuthorInfo.vue";
 import NewMessage from "../components/NewMessage.vue";
 import LoadMore from "../components/LoadMore.vue";
+import axios from "axios";
 export default {
   name: "Index",
   components: {
@@ -100,14 +116,26 @@ export default {
       ],
     };
   },
+  mounted: {
+    //页面一加载就获取博客卡片
+    activated() {
+      //activated路由组件被激活时触发（组件展示）
+      console.log();
+    },
+  },
 };
 </script>
 
 <style lang="less" scoped>
 @rem: 32rem;
-.container {
-  max-width: (1250/@rem);
-  min-width: 320px;
+.webcontainer {
+  max-width: (1250 / @rem);
+  min-width: 370px;
+  margin: 0 auto;
+}
+.modelcontainer {
+  max-width: (1250 / @rem);
+  min-width: 96%;
   margin: 0 auto;
 }
 </style>
