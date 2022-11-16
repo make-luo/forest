@@ -45,6 +45,7 @@
         :html="false"
         :subfield="false"
         :boxShadow="false"
+        codeStyle="vs"
         defaultOpen="preview"
       ></mavon-editor>
       <div class="article-info">
@@ -62,6 +63,9 @@ import { mavonEditor } from "mavon-editor";
 import "mavon-editor/dist/css/index.css";
 export default {
   name: "ShowArticle",
+  components: {
+    mavonEditor,
+  },
   data() {
     return {
       content: `
@@ -83,9 +87,7 @@ export default {
 `,
     };
   },
-  components: {
-    mavonEditor,
-  },
+
   computed: {
     value() {
       return this.content;

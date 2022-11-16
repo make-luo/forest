@@ -1,32 +1,36 @@
 <template>
   <div class="commentcontainer">
-    <div class="webcomment-box hidden-sm-and-down">
+    <div class="webcomment-box hidden-xs-only">
       <ShowArticle></ShowArticle>
-      <MessageBox> </MessageBox>
-      <CommentArea>
-        <MessageBox></MessageBox>
-      </CommentArea>
+      <W_MessageBox> </W_MessageBox>
+      <W_CommentArea>
+        <W_MessageBox></W_MessageBox>
+      </W_CommentArea>
     </div>
-    <div class="modilecomment-box hidden-md-and-up">
+    <div class="modilecomment-box hidden-sm-and-up">
       <ShowArticle></ShowArticle>
-      <MessageBox> </MessageBox>
-      <CommentArea>
-        <MessageBox></MessageBox>
-      </CommentArea>
+      <M_MessageBox></M_MessageBox>
+      <M_CommentArea>
+        <M_MessageBox></M_MessageBox>
+      </M_CommentArea>
     </div>
   </div>
 </template>
 
 <script>
-import CommentArea from "../components/CommentArea.vue";
-import MessageBox from "../components/MessageBox.vue";
+import M_CommentArea from "../components/M_CommentArea.vue";
+import W_CommentArea from "../components/W_CommentArea.vue";
+import M_MessageBox from "../components/M_MessageBox.vue";
+import W_MessageBox from "../components/W_MessageBox.vue";
 import ShowArticle from "../components/ShowArticle.vue";
 
 export default {
   name: "Article",
   components: {
-    CommentArea,
-    MessageBox,
+    M_CommentArea,
+    W_CommentArea,
+    W_MessageBox,
+    M_MessageBox,
     ShowArticle,
   },
 };

@@ -1,11 +1,13 @@
 <template>
   <div id="app">
     <Top></Top>
-    <div class="webcontainer hidden-sm-and-down">
+    <div class="webcontainer hidden-xs-only">
       <el-row :gutter="25">
         <el-col :md="24" :lg="16">
           <!-- 博客列表 -->
-          <BlogCard :blogCards="blogCards"></BlogCard>
+          <W_BlogCard
+            :blogCards="blogCards"
+          ></W_BlogCard>
           <LoadMore></LoadMore>
         </el-col>
         <el-col class="hidden-md-and-down" :lg="8">
@@ -16,18 +18,14 @@
         </el-col>
       </el-row>
     </div>
-    <div class="modelcontainer hidden-md-and-up">
+    <div class="modelcontainer hidden-sm-and-up">
       <el-row :gutter="25">
         <el-col :md="24" :lg="16">
           <!-- 博客列表 -->
-          <BlogCard :blogCards="blogCards"></BlogCard>
+          <M_BlogCard
+            :blogCards="blogCards"
+          ></M_BlogCard>
           <LoadMore></LoadMore>
-        </el-col>
-        <el-col class="hidden-md-and-down" :lg="8">
-          <el-row>
-            <el-col :lg="24"><AuthorInfo></AuthorInfo></el-col>
-            <el-col :lg="24"> <NewMessage></NewMessage> </el-col>
-          </el-row>
         </el-col>
       </el-row>
     </div>
@@ -36,7 +34,8 @@
 
 <script>
 import Top from "../components/top";
-import BlogCard from "../components/BlogCard";
+import M_BlogCard from "../components/M_BlogCard.vue";
+import W_BlogCard from "../components/W_BlogCard.vue";
 import AuthorInfo from "../components/AuthorInfo.vue";
 import NewMessage from "../components/NewMessage.vue";
 import LoadMore from "../components/LoadMore.vue";
@@ -45,7 +44,8 @@ export default {
   name: "Index",
   components: {
     Top,
-    BlogCard,
+    M_BlogCard,
+    W_BlogCard,
     AuthorInfo,
     NewMessage,
     LoadMore,
@@ -116,12 +116,14 @@ export default {
       ],
     };
   },
-  mounted: {
+  created() {
     //页面一加载就获取博客卡片
-    activated() {
-      //activated路由组件被激活时触发（组件展示）
-      console.log();
-    },
+    console.log("你好");
+    axios
+      .get("https://api.uixsj.cn/hitokoto/get?type=social")
+      .then((response) => {
+        console.log(response);
+      });
   },
 };
 </script>

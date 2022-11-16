@@ -2,9 +2,9 @@
   <el-row>
     <el-col :md="24">
       <div
-        class="card-container"
-        v-for="blogCard in blogCards"
-        :key="blogCard.blogId"
+        class="webcontainer"
+        v-for="(blogCard, index) in blogCards"
+        :key="index"
       >
         <div class="img-box">
           <router-link :to="blogCard.link">
@@ -51,7 +51,7 @@ export default {
 
 <style lang="less" scoped>
 @rem: 32rem;
-.card-container {
+.webcontainer {
   width: 100%;
   border-radius: (20 / @rem);
   color: #3e5b77;
@@ -87,7 +87,7 @@ export default {
         overflow: hidden;
         text-overflow: ellipsis;
         padding-top: (15 / @rem);
-        font-size: 13px;
+        font-size: (15 / @rem);
       }
     }
     .author {

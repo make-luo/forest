@@ -1,25 +1,24 @@
 <template>
   <div class="sortContainer">
-    <div class="websort hidden-sm-and-down">
+    <div class="websort hidden-xs-only">
       <div class="sortbox">
         <div class="sortList">
           <el-col :lg="4" :sm="6" v-for="sort in sortList" :key="sort.sortId">
             <el-button round class="sort">{{ sort.sortName }}</el-button>
           </el-col>
         </div>
-        <BlogCard class="blogcard" :blogCards="blogCards"></BlogCard>
+        <W_BlogCard class="blogcard" :blogCards="blogCards"></W_BlogCard>
+        <LoadMore></LoadMore>
       </div>
     </div>
-    <div class="modilesort hidden-md-and-up">
+    <div class="modilesort hidden-sm-and-up">
       <div class="sortbox">
         <div class="sortList">
-          <el-row>
-            <el-col :xs="6" :sm="4" v-for="sort in sortList" :key="sort.sortId">
-              <el-button round class="sort">{{ sort.sortName }}</el-button>
-            </el-col></el-row
-          >
+          <el-col :xs="6" :sm="4" v-for="sort in sortList" :key="sort.sortId">
+            <el-button round class="sort">{{ sort.sortName }}</el-button>
+          </el-col>
         </div>
-        <BlogCard class="blogcard" :blogCards="blogCards"></BlogCard>
+        <M_BlogCard class="blogcard" :blogCards="blogCards"></M_BlogCard>
         <LoadMore></LoadMore>
       </div>
     </div>
@@ -27,7 +26,8 @@
 </template>
 
 <script>
-import BlogCard from "../components/BlogCard";
+import M_BlogCard from "../components/M_BlogCard.vue";
+import W_BlogCard from "../components/W_BlogCard.vue";
 import LoadMore from "../components/LoadMore.vue";
 export default {
   name: "Sort",
@@ -128,7 +128,8 @@ export default {
     };
   },
   components: {
-    BlogCard,
+    M_BlogCard,
+    W_BlogCard,
     LoadMore,
   },
 };
@@ -166,8 +167,8 @@ export default {
     flex-wrap: wrap;
     background-color: #fff;
     border-radius: (30 / @rem);
-    margin: 30px 0px ;
-    .sort{
+    margin: 30px 0px;
+    .sort {
       margin: 5px 0px;
     }
   }

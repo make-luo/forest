@@ -1,12 +1,12 @@
 <template>
   <div class="shortcontainer">
-    <div class="webshortcard hidden-sm-and-down">
+    <div class="webshortcard hidden-xs-only">
       <div class="card" v-for="card in cards" :key="card.id">
         <el-divider class="time">{{ card.time }}</el-divider>
         <div class="content">{{ card.content }}</div>
       </div>
     </div>
-    <div class="modileshortcard hidden-md-and-up">
+    <div class="modileshortcard hidden-sm-and-up">
       <div class="card" v-for="card in cards" :key="card.id">
         <el-divider class="time">{{ card.time }}</el-divider>
         <div class="content">{{ card.content }}</div>

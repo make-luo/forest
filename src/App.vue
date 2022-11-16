@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="app">
-    <Nav></Nav>
+    <Nav class="nav"></Nav>
     <router-view></router-view>
     <el-backtop target=".app"></el-backtop>
     <Footer></Footer>
@@ -35,4 +35,7 @@ export default {
   height: 100vh;
   overflow-x: hidden;
 }
+.nav{
+    z-index: 100;
+  }
 </style>

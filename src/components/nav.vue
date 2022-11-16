@@ -1,6 +1,6 @@
 <template>
   <div class="navcontainer">
-    <div class="webnav hidden-sm-and-down" @mouseleave="noShow">
+    <div class="webnav hidden-xs-only" @mouseleave="noShow">
       <el-image
         class="author-img"
         @mouseover="showNav"
@@ -26,7 +26,7 @@
         </ul>
       </transition>
     </div>
-    <div class="mobilenav hidden-md-and-up">
+    <div class="mobilenav hidden-sm-and-up">
       <el-image
         class="author-img"
         @click="drawer = true"

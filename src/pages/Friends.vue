@@ -281,9 +281,6 @@ export default {
       }
     }
   }
-  .friend-list{
-
-  }
 }
 
 @keyframes round {

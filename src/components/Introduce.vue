@@ -1,6 +1,6 @@
 <template>
   <div class="introduce-box">
-    <div class="webintroduce hidden-sm-and-down">
+    <div class="webintroduce hidden-xs-only">
       <h1>{{ title }}</h1>
       <el-image
         :src="require(`../assets/imgs/underline.png`)"
@@ -10,7 +10,7 @@
         {{ content }}
       </p>
     </div>
-    <div class="modileintroduce hidden-md-and-up">
+    <div class="modileintroduce hidden-sm-and-up">
       <h1>{{ title }}</h1>
       <el-image
         :src="require(`../assets/imgs/underline.png`)"

@@ -1,25 +1,27 @@
 <template>
   <div class="comment-box">
-    <div class="webcomment hidden-sm-and-down">
+    <div class="webcomment hidden-xs-only">
       <Introduce :title="title" :content="content"></Introduce>
-      <MessageBox v-show="show"></MessageBox>
-      <CommentArea>
-        <MessageBox></MessageBox>
-      </CommentArea>
+      <W_MessageBox v-show="show"></W_MessageBox>
+      <W_CommentArea>
+        <W_MessageBox></W_MessageBox>
+      </W_CommentArea>
     </div>
-    <div class="modilecomment hidden-md-and-up">
+    <div class="modilecomment hidden-sm-and-up">
       <Introduce :title="title" :content="content"></Introduce>
-      <MessageBox v-show="show"></MessageBox>
-      <CommentArea>
-        <MessageBox></MessageBox>
-      </CommentArea>
+      <M_MessageBox v-show="show"></M_MessageBox>
+      <M_CommentArea>
+        <M_MessageBox></M_MessageBox>
+      </M_CommentArea>
     </div>
   </div>
 </template>
 
 <script>
-import MessageBox from "../components/MessageBox.vue";
-import CommentArea from "../components/CommentArea.vue";
+import M_MessageBox from "../components/M_MessageBox.vue";
+import W_MessageBox from "../components/W_MessageBox.vue";
+import M_CommentArea from "../components/M_CommentArea.vue";
+import W_CommentArea from "../components/W_CommentArea.vue";
 import Introduce from "../components/Introduce.vue";
 export default {
   name: "Comments",
@@ -32,8 +34,10 @@ export default {
     };
   },
   components: {
-    MessageBox,
-    CommentArea,
+    W_MessageBox,
+    M_MessageBox,
+    M_CommentArea,
+    W_CommentArea,
     Introduce,
   },
 };

@@ -31,7 +31,6 @@
 </template>
 
 <script>
-import { request } from "http";
 
 export default {
   name: "NavDrawer",

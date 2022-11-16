@@ -1,6 +1,6 @@
 <template>
   <div class="footerContainer">
-    <div class="webfooter hidden-sm-and-down">
+    <div class="webfooter hidden-xs-only">
       <el-image
         :src="require('../assets/imgs/logo.png')"
         fit="cover"
@@ -63,7 +63,7 @@
       </div>
       <div class="introduce">不断学习,拯救处于混沌中的我</div>
     </div>
-    <div class="mobilefooter hidden-md-and-up">
+    <div class="mobilefooter hidden-sm-and-up">
       <el-image
         :src="require('../assets/imgs/logo.png')"
         fit="cover"
