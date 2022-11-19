@@ -5,9 +5,7 @@
       <el-row :gutter="25">
         <el-col :md="24" :lg="16">
           <!-- 博客列表 -->
-          <W_BlogCard
-            :blogCards="blogCards"
-          ></W_BlogCard>
+          <W_BlogCard :blogCards="blogCards"></W_BlogCard>
           <LoadMore></LoadMore>
         </el-col>
         <el-col class="hidden-md-and-down" :lg="8">
@@ -22,9 +20,7 @@
       <el-row :gutter="25">
         <el-col :md="24" :lg="16">
           <!-- 博客列表 -->
-          <M_BlogCard
-            :blogCards="blogCards"
-          ></M_BlogCard>
+          <M_BlogCard :blogCards="blogCards"></M_BlogCard>
           <LoadMore></LoadMore>
         </el-col>
       </el-row>
@@ -55,7 +51,7 @@ export default {
       blogCards: [
         {
           blogId: 1,
-          image: 7,
+          image: "7",
           link: "/article",
           title: "初始Vue",
           introduce:
@@ -67,7 +63,7 @@ export default {
         },
         {
           blogId: 5,
-          image: 4,
+          image: "4",
           link: "/article",
           title: "初始Vue",
           introduce:
@@ -79,7 +75,7 @@ export default {
         },
         {
           blogId: 2,
-          image: 1,
+          image: "1",
           link: "/article",
           title: "初始Vue",
           introduce:
@@ -91,7 +87,7 @@ export default {
         },
         {
           blogId: 3,
-          image: 2,
+          image: "2",
           link: "/article",
           title: "初始Vue",
           introduce:
@@ -103,7 +99,7 @@ export default {
         },
         {
           blogId: 4,
-          image: 3,
+          image: "3",
           link: "/article",
           title: "初始Vue",
           introduce:
@@ -116,14 +112,17 @@ export default {
       ],
     };
   },
-  created() {
-    //页面一加载就获取博客卡片
-    console.log("你好");
-    axios
-      .get("https://api.uixsj.cn/hitokoto/get?type=social")
-      .then((response) => {
-        console.log(response);
+  mounted() {
+    this.blogCards.forEach((e) => {
+      axios({
+        url: `http://localhost:8080/img/getimg/${e.image}`,
+        responseType: "blob",
+      }).then((res) => {
+        let data = new Blob([res.data]);
+        let url = window.URL.createObjectURL(data);
+        e.image = url;
       });
+    });
   },
 };
 </script>

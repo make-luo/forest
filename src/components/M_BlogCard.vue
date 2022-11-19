@@ -9,8 +9,10 @@
         <div class="img-box">
           <router-link :to="blogCard.link">
             <el-image
-              :src="require(`../assets/imgs/${blogCard.image}.png`)"
+              :src="blogCard.image"
               fit="cover"
+              lazy
+              @error="reload(blogCard, index)"
             ></el-image>
           </router-link>
         </div>
@@ -40,11 +42,20 @@
 </template>
   
   <script>
+import axios from "axios";
 export default {
   name: "BlogCard",
   props: ["blogCards"],
   data() {
     return {};
+  },
+  methods: {
+    reload(blogCard, index) {
+      //出现加载不出就换张照片
+      let temp = blogCard.image;
+      blogCard.image = this.blogCards[index + 3].image;
+      this.blogCards[index + 3].image = temp;
+    },
   },
 };
 </script>
