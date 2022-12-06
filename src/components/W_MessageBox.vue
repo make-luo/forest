@@ -3,24 +3,39 @@
     <W_CommentCard></W_CommentCard>
     <div class="webmessage-box">
       <div class="user-info">
-        <span>昵称:</span
-        ><el-input v-model="name" placeholder="请输入昵称"></el-input>
-        <span>邮箱:</span
-        ><el-input v-model="email" placeholder="请输入邮箱"></el-input>
+        <el-form :model="Comment" :rules="rules">
+          <el-form-item label="昵称" prop="nickname">
+            <el-input
+              v-model="Comment.nickname"
+              placeholder="请输入昵称"
+              name="name"
+            ></el-input>
+          </el-form-item>
+
+          <el-form-item label="邮箱" prop="email">
+            <el-input
+              v-model="Comment.email"
+              placeholder="请输入邮箱"
+              name="email"
+            ></el-input>
+          </el-form-item>
+          <div class="line"></div>
+          <el-form-item label="内容" prop="content">
+            <el-input
+              type="textarea"
+              :autosize="{ minRows: 6 }"
+              placeholder="请输入内容"
+              v-model="Comment.content"
+            >
+            </el-input
+          ></el-form-item>
+        </el-form>
       </div>
-      <div class="line"></div>
-      <el-input
-        type="textarea"
-        :autosize="{ minRows: 6 }"
-        placeholder="请输入内容"
-        v-model="content"
-      >
-      </el-input>
       <div v-show="show">
         <span class="preshow">预览：</span>
         <mavon-editor
           class="preview"
-          :value="content"
+          :value="Comment.content"
           :toolbarsFlag="false"
           :html="false"
           :subfield="false"
@@ -39,8 +54,12 @@
           <el-button icon="el-icon-search" circle @click="display"></el-button>
         </div>
         <div class="content-info">
-          <span>{{ length }}/130</span>
-          <el-button round @click="submit" icon="el-icon-position"></el-button>
+          <span>{{ length }}</span>
+          <el-button
+              round
+              @click="submit(Comment)"
+              icon="el-icon-position"
+            ></el-button>
         </div>
       </div>
     </div>
@@ -51,14 +70,44 @@
 import { mavonEditor } from "mavon-editor";
 import W_CommentCard from "./W_CommentCard.vue";
 import "mavon-editor/dist/css/index.css";
+import axios from "axios";
 export default {
   name: "MessageBox",
+  props: ["comment", "replay_comment"],
   data() {
     return {
-      content: "",
       show: false,
-      name: "",
-      email: "",
+      Comment: {
+        addressID: null, //需要接收博客或者留言的id;
+        fatherCommentID: null, //父评论的ID
+        content: "",
+        isWebMaster: null,
+        nickname: "",
+        email: "",
+        subComment: null, //子评论
+        replayuserid: null,
+      },
+      rules: {
+        nickname: [
+          { required: true, message: "请输入昵称", trigger: "blur" },
+          { min: 1, max: 5, message: "长度在 1 到 5 个字符", trigger: "blur" },
+        ],
+        email: [
+          { required: true, message: "请输入邮箱地址", trigger: "blur" },
+          {
+            type: "email",
+            message: "请输入正确的邮箱地址",
+            trigger: ["blur", "change"],
+          },
+        ],
+        content: [
+          {
+            required: true,
+            message: "评论内容不能为空",
+            trigger: "blur",
+          },
+        ],
+      },
     };
   },
   components: {
@@ -69,31 +118,78 @@ export default {
     display() {
       this.show = !this.show;
     },
-    submit() {
-      if (this.content.length <= 130) {
+    submit(Comment) {
+      if (
+        Comment.nickname == "" ||
+        Comment.email.length <= 16 ||
+        Comment.content == ""
+      ) {
         this.$message({
-          message: "提交成功",
-          type: "success",
+          message: "请将表单填完整😄",
+          type: "warning",
         });
-      } else {
-        this.$message.error({
-          message: "提交失败,超出最大文本长度(最大为130字符)",
-        });
-        return this.content.length;
+        return;
       }
+
+      Comment.addressID = this.$route.query.id;
+      console.log("this.comment", this.comment);
+      console.log("this.replay_comment", this.replay_comment);
+      if (typeof this.comment != "undefined") {
+        Comment.fatherCommentID = this.comment.commentID;
+        Comment.replayuserid = this.comment.userID;
+        axios
+          .post("http://10.10.120.234:8080/comment/saveComment", Comment)
+          .then((res) => {
+            this.$message({
+              message: res.data,
+              type: "success",
+            });
+          });
+        this.comment.showReplay = false;
+        Comment.content = "";
+        Comment.isWebMaster = false;
+        Comment.nickname = null;
+        Comment.email = null;
+        Comment.subComment = null; //子评论
+      } else if (typeof this.replay_comment != "undefined") {
+        Comment.fatherCommentID = this.replay_comment.fatherCommentID;
+        Comment.replayuserid = this.replay_comment.userID;
+        axios
+          .post("http://10.10.120.234:8080/comment/saveComment", Comment)
+          .then((res) => {
+            this.$message({
+              message: res.data,
+              type: "success",
+            });
+          });
+
+        this.replay_comment.showReplay = false;
+        Comment.content = "";
+        Comment.isWebMaster = false;
+        Comment.nickname = null;
+        Comment.email = null;
+        Comment.subComment = null; //子评论
+      } else {
+        axios
+          .post("http://10.10.120.234:8080/comment/saveComment", Comment)
+          .then((res) => {
+            this.$message({
+              message: res.data,
+              type: "success",
+            });
+          });
+        Comment.content = "";
+        Comment.isWebMaster = false;
+        Comment.nickname = null;
+        Comment.email = null;
+        Comment.subComment = null; //子评论
+      }
+      location.reload();
     },
   },
   computed: {
     length() {
-      if (this.content.length <= 130) {
-        return this.content.length;
-      } else {
-        this.$message({
-          message: "超出最大文本长度（最大为130字符）",
-          type: "warning",
-        });
-        return this.content.length;
-      }
+      return this.Comment.content.length;
     },
   },
 };

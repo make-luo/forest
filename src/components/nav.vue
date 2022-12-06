@@ -18,7 +18,15 @@
             <router-link to="/shortPhrase"><span>📖</span>短句</router-link>
           </li>
           <li>
-            <router-link to="/comments"><span>💌</span>留言</router-link>
+            <router-link
+              :to="{
+                path: '/comments',
+                query: {
+                  id: 9999, //最大参数，代表留言区
+                },
+              }"
+              ><span>💌</span>留言</router-link
+            >
           </li>
           <li>
             <router-link to="/friends"><span>🥳</span>朋友</router-link>

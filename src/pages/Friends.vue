@@ -28,7 +28,7 @@
         <el-row>
           <el-col :xs="8" :sm="6" v-for="card in cards" :key="card.id">
             <el-link
-              href="https://element.eleme.io"
+              :href="card.webaddress"
               :underline="false"
               target="_blank"
             >
@@ -66,7 +66,7 @@
         <el-row>
           <el-col :xs="8" :sm="6" v-for="card in cards" :key="card.id">
             <el-link
-              href="https://element.eleme.io"
+              :href="card.webaddress"
               :underline="false"
               target="_blank"
             >
@@ -80,58 +80,32 @@
 </template>
 
 <script>
+import axios from "axios";
 import FriendCard from "../components/FriendCard.vue";
 export default {
   name: "Friends",
   components: { FriendCard },
   data() {
     return {
-      cards: [
-        {
-          id: 1,
-          avatar: "钟离",
-          name: "钟离",
-          sign: "旅途终将会迎来终点不必匆忙",
-        },
-        {
-          id: 2,
-          avatar: "七七",
-          name: "七七",
-          sign: "我是七七，是个僵尸",
-        },
-        {
-          id: 3,
-          avatar: "早柚",
-          name: "早柚",
-          sign: "不准在我睡觉的时候，偷偷摸我的头",
-        },
-        {
-          id: 4,
-          avatar: "钟离",
-          name: "钟离",
-          sign: "旅途终将会迎来终点不必匆忙",
-        },
-        {
-          id: 5,
-          avatar: "七七",
-          name: "七七",
-          sign: "我是七七，是个僵尸",
-        },
-        {
-          id: 6,
-          avatar: "早柚",
-          name: "早柚",
-          sign: "不准在我睡觉的时候，偷偷摸我的头",
-        },
-      ],
+      cards: [],
     };
   },
   methods: {
     toComment() {
       this.$router.push({
         path: "/comments",
+        query: {
+          id: 9999,
+        },
       });
     },
+  },
+  mounted() {
+    axios
+      .get("http://10.10.120.234:8080/friend/getAllFriends")
+      .then(({ data }) => {
+        this.cards = data;
+      });
   },
 };
 </script>

@@ -19,12 +19,16 @@
         <p>
           🎃
           <span
-            >头像与邮箱绑定<el-link type="primary">Gravatar</el-link>服务</span
+            >头像采用<el-link
+              type="primary"
+              href="https://github.com/wave-charts/avatar-gen/"
+              >Wave</el-link
+            ></span
           >
         </p>
         <p>
           📭
-          <span>邮箱能够收到回复提醒(或许在垃圾邮箱里)</span>
+          <span>邮箱能够收到回复提醒(这个功能没做)</span>
         </p>
       </div>
     </div>

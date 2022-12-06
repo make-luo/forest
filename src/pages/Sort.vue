@@ -1,25 +1,28 @@
 <template>
   <div class="sortContainer">
+    <div class="sortList">
+      <el-col :sm="2" :xs="6" v-for="sort in sortList" :key="sort.id">
+        <el-button round class="sort" @click="getblogs(sort.id)">{{
+          sort.content
+        }}</el-button>
+      </el-col>
+    </div>
     <div class="websort hidden-xs-only">
       <div class="sortbox">
-        <div class="sortList">
-          <el-col :lg="4" :sm="6" v-for="sort in sortList" :key="sort.sortId">
-            <el-button round class="sort">{{ sort.sortName }}</el-button>
-          </el-col>
-        </div>
-        <W_BlogCard class="blogcard" :blogCards="blogCards"></W_BlogCard>
-        <LoadMore></LoadMore>
+        <W_BlogCard class="blogcard" :blogCards="showCards"></W_BlogCard>
+        <LoadMore v-show="isShowButton"></LoadMore>
+        <span v-show="!isShowButton" style="font-size: 13px"
+          >-----------我也是有底线的😣-----------</span
+        >
       </div>
     </div>
     <div class="modilesort hidden-sm-and-up">
       <div class="sortbox">
-        <div class="sortList">
-          <el-col :xs="6" :sm="4" v-for="sort in sortList" :key="sort.sortId">
-            <el-button round class="sort">{{ sort.sortName }}</el-button>
-          </el-col>
-        </div>
-        <M_BlogCard class="blogcard" :blogCards="blogCards"></M_BlogCard>
-        <LoadMore></LoadMore>
+        <M_BlogCard class="blogcard" :blogCards="showCards"></M_BlogCard>
+        <LoadMore v-show="isShowButton"></LoadMore>
+        <span v-show="!isShowButton" style="font-size: 13px"
+          >-----------我也是有底线的😣-----------</span
+        >
       </div>
     </div>
   </div>
@@ -29,102 +32,13 @@
 import M_BlogCard from "../components/M_BlogCard.vue";
 import W_BlogCard from "../components/W_BlogCard.vue";
 import LoadMore from "../components/LoadMore.vue";
+import { mapGetters, mapState } from "vuex";
+import axios from "axios";
 export default {
   name: "Sort",
   data() {
     return {
-      sortList: [
-        {
-          sortId: 1,
-          sortName: "全部",
-        },
-        {
-          sortId: 2,
-          sortName: "Vue",
-        },
-        {
-          sortId: 3,
-          sortName: "JAVA",
-        },
-        {
-          sortId: 4,
-          sortName: "游戏",
-        },
-        {
-          sortId: 5,
-          sortName: "书籍",
-        },
-        {
-          sortId: 4,
-          sortName: "游戏",
-        },
-        {
-          sortId: 5,
-          sortName: "书籍",
-        },
-      ],
-      blogCards: [
-        {
-          blogId: 1,
-          image: 7,
-          link: "/article",
-          title: "初始Vue",
-          introduce:
-            "想让Vue工作，就必须创建一个Vue实例，且要传入一个配置对象....",
-          authorAvatar: "logo",
-          authorName: "山野",
-          time: "2022/08/09",
-          tag: "Vue",
-        },
-        {
-          blogId: 5,
-          image: 4,
-          link: "/article",
-          title: "初始Vue",
-          introduce:
-            "想让Vue工作，就必须创建一个Vue实例，且要传入一个配置对象....",
-          authorAvatar: "logo",
-          authorName: "山野",
-          time: "2022/08/09",
-          tag: "Vue",
-        },
-        {
-          blogId: 2,
-          image: 1,
-          link: "/article",
-          title: "初始Vue",
-          introduce:
-            "想让Vue工作，就必须创建一个Vue实例，且要传入一个配置对象....",
-          authorAvatar: "logo",
-          authorName: "山野",
-          time: "2022/08/09",
-          tag: "Vue",
-        },
-        {
-          blogId: 3,
-          image: 2,
-          link: "/article",
-          title: "初始Vue",
-          introduce:
-            "想让Vue工作，就必须创建一个Vue实例，且要传入一个配置对象....",
-          authorAvatar: "logo",
-          authorName: "山野",
-          time: "2022/08/09",
-          tag: "Vue",
-        },
-        {
-          blogId: 4,
-          image: 3,
-          link: "/article",
-          title: "初始Vue",
-          introduce:
-            "想让Vue工作，就必须创建一个Vue实例，且要传入一个配置对象....",
-          authorAvatar: "logo",
-          authorName: "山野",
-          time: "2022/08/09",
-          tag: "Vue",
-        },
-      ],
+      sortList: [],
     };
   },
   components: {
@@ -132,25 +46,54 @@ export default {
     W_BlogCard,
     LoadMore,
   },
+  methods: {
+    getblogs(value) {
+      if (value == 0) {
+        this.$store.dispatch("blogCards/getblogs");
+      } else {
+        this.$store.dispatch("blogCards/getBlogsById", value);
+      }
+    },
+    //axios的同步初试
+    getAllSortList() {
+      return axios.get("http://10.10.120.234:8080/tag/getAllTag");
+    },
+    async getSortList() {
+      let result = null;
+      result = await this.getAllSortList();
+      this.sortList = result.data;
+    },
+  },
+  computed: {
+    ...mapState("blogCards", ["showCards"]),
+    ...mapGetters("blogCards", ["isShowButton"]),
+  },
+  mounted() {
+    this.getSortList();
+    this.$store.dispatch("blogCards/getblogs");
+  },
 };
 </script>
 
 <style lang="less" scoped>
 @rem: 32rem;
+.sortList {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  background-color: #fff;
+  border-radius: (30 / @rem);
+  margin: 30px 0px;
+  .sort {
+    margin: 5px 0px;
+  }
+}
 .websort {
   max-width: (1250 / @rem);
   margin: 0 auto;
   padding-top: (200 / @rem);
   font-size: (20 / @rem);
-  .sortList {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    background-color: #fff;
-    margin: (50 / @rem);
-    border-radius: (30 / @rem);
-    padding: (40 / @rem);
-  }
+
   .blogcard {
     margin: (50 / @rem);
   }
@@ -161,16 +104,5 @@ export default {
   margin: 0 auto;
   padding-top: (200 / @rem);
   font-size: (20 / @rem);
-  .sortList {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    background-color: #fff;
-    border-radius: (30 / @rem);
-    margin: 30px 0px;
-    .sort {
-      margin: 5px 0px;
-    }
-  }
 }
 </style>

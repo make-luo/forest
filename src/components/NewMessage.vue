@@ -6,49 +6,28 @@
         <el-image :src="require('../assets/imgs/underline.png')"></el-image>
       </div>
     </div>
+
     <div class="messagelist">
-      <div class="message">
-        <el-image
-          :src="require('../assets/imgs/头像.png')"
-          fit="cover"
-        ></el-image>
+      <div
+        class="message"
+        v-for="message in newMessage"
+        :key="message.commentID"
+      >
+        <el-image :src="message.avatar" fit="cover">
+          <div slot="error" class="image-slot">
+            <el-image :src="message.avatar" fit="cover" lazy></el-image>
+          </div>
+        </el-image>
         <div class="messageinfo">
-          <span class="name">尤雨溪 <span v-show="false">站长</span> </span>
+          <span class="name"
+            >{{ message.nickname }}
+            <span v-show="message.isWebMaster">站长</span>
+          </span>
           <p class="content">
-            <span v-show="false"></span>小兄弟你Vue写的不行啊
+            <span v-show="message.replayusername"
+              >@{{ message.replayusername }}：</span
+            >{{ message.content }}
           </p>
-        </div>
-      </div>
-      <div class="message">
-        <el-image
-          :src="require('../assets/imgs/logo.png')"
-          fit="cover"
-        ></el-image>
-        <div class="messageinfo">
-          <span class="name">山野 <span v-show="true">站长</span> </span>
-          <p class="content"><span v-show="true">@尤雨溪:</span>你会Vue吗？</p>
-        </div>
-      </div>
-      <div class="message">
-        <el-image
-          :src="require('../assets/imgs/头像.png')"
-          fit="cover"
-        ></el-image>
-        <div class="messageinfo">
-          <span class="name">尤雨溪 <span v-show="false">站长</span> </span>
-          <p class="content">
-            <span v-show="false"></span>小兄弟，路还长，你才刚刚开始
-          </p>
-        </div>
-      </div>
-      <div class="message">
-        <el-image
-          :src="require('../assets/imgs/logo.png')"
-          fit="cover"
-        ></el-image>
-        <div class="messageinfo">
-          <span class="name">山野 <span v-show="true">站长</span> </span>
-          <p class="content"><span v-show="true">@尤雨溪:</span>啊！？</p>
         </div>
       </div>
     </div>
@@ -56,8 +35,32 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "NewMessage",
+  data() {
+    return {
+      newMessage: [],
+    };
+  },
+  mounted() {
+    axios
+      .get("http://10.10.120.234:8080/comment/getLatestComment")
+      .then(({ data }) => {
+        data.forEach((e) => {
+          axios({
+            url: `http://10.10.120.234:8080/picture/getAvatar/${e.pictureID}`,
+            responseType: "blob",
+          }).then((res) => {
+            let data = new Blob([res.data]);
+            let url = window.URL.createObjectURL(data);
+            e.avatar = url;
+          });
+        });
+        this.newMessage = data;
+      });
+  },
 };
 </script>
 

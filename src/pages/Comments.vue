@@ -2,16 +2,28 @@
   <div class="comment-box">
     <div class="webcomment hidden-xs-only">
       <Introduce :title="title" :content="content"></Introduce>
-      <W_MessageBox v-show="show"></W_MessageBox>
-      <W_CommentArea>
-        <W_MessageBox></W_MessageBox>
+      <W_MessageBox> </W_MessageBox>
+      <W_CommentArea :commentlist="showComment">
+        <!-- 作用域插槽 -->
+        <template slot-scope="{ comment, replay_comment }">
+          <W_MessageBox
+            :comment="comment"
+            :replay_comment="replay_comment"
+          ></W_MessageBox>
+        </template>
       </W_CommentArea>
     </div>
     <div class="modilecomment hidden-sm-and-up">
       <Introduce :title="title" :content="content"></Introduce>
-      <M_MessageBox v-show="show"></M_MessageBox>
-      <M_CommentArea>
-        <M_MessageBox></M_MessageBox>
+      <M_MessageBox></M_MessageBox>
+      <M_CommentArea :commentlist="showComment">
+        <!-- 作用域插槽 -->
+        <template slot-scope="{ comment, replay_comment }">
+          <M_MessageBox
+            :comment="comment"
+            :replay_comment="replay_comment"
+          ></M_MessageBox>
+        </template>
       </M_CommentArea>
     </div>
   </div>
@@ -23,6 +35,7 @@ import W_MessageBox from "../components/W_MessageBox.vue";
 import M_CommentArea from "../components/M_CommentArea.vue";
 import W_CommentArea from "../components/W_CommentArea.vue";
 import Introduce from "../components/Introduce.vue";
+import { mapState } from "vuex";
 export default {
   name: "Comments",
   data() {
@@ -39,6 +52,15 @@ export default {
     M_CommentArea,
     W_CommentArea,
     Introduce,
+  },
+  computed: {
+    ...mapState("commentList", ["showComment"]),
+  },
+  mounted() {
+    this.$store.dispatch(
+      "commentList/getCommentListByBlogID",
+      this.$route.query.id
+    );
   },
 };
 </script>

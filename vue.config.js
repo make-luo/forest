@@ -3,9 +3,9 @@ module.exports = {
     devServer: {
         port: 8080,
         proxy: {
-            '/img': {
-                target: 'http://localhost:8888',
-                pathRewrite: { '^/img': '' },
+            '/': {
+                target: 'http://localhost:8989',
+                pathRewrite: { '^/': '' },
                 ws: true,
                 changeOrigin: true
             },

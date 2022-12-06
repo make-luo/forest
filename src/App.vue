@@ -1,7 +1,10 @@
 <template>
   <div id="app" class="app">
     <Nav class="nav"></Nav>
+    <!-- 保持路由挂载 -->
+
     <router-view></router-view>
+
     <el-backtop target=".app"></el-backtop>
     <Footer></Footer>
   </div>
@@ -35,7 +38,7 @@ export default {
   height: 100vh;
   overflow-x: hidden;
 }
-.nav{
-    z-index: 100;
-  }
+.nav {
+  z-index: 100;
+}
 </style>

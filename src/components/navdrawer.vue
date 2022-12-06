@@ -16,7 +16,14 @@
       <span>&gt;</span>
     </li>
     <li>
-      <router-link to="/comments" @click="close"
+      <router-link
+        :to="{
+          path: '/comments',
+          query: {
+            id: 9999, //最大参数，代表留言区
+          },
+        }"
+        @click="close"
         ><span>💌</span>留言</router-link
       >
       <span>&gt;</span>
@@ -31,7 +38,6 @@
 </template>
 
 <script>
-
 export default {
   name: "NavDrawer",
   props: ["drawer"],

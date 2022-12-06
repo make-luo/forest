@@ -1,24 +1,25 @@
 <template>
   <div class="commentcontainer">
     <div class="webarea-box">
-      <h1>2条评论</h1>
+      <h1>{{ countComments }}条评论</h1>
       <div class="commentlist">
         <div
           class="comment"
           v-for="comment in commentlist"
-          :key="comment.commentId"
+          :key="comment.commentID"
         >
           <div class="main-comment">
             <div class="leader-info">
-              <el-image
-                :src="require(`../assets/imgs/${comment.avatar}.png`)"
-                fit="cover"
-              ></el-image>
+              <el-image :src="comment.avatar" fit="cover" lazy>
+                <div slot="error" class="image-slot">
+                  <el-image :src="comment.avatar" fit="cover" lazy></el-image>
+                </div>
+              </el-image>
               <div class="messageinfo">
                 <div class="name">
-                  {{ comment.name }}
-                  <span v-show="comment.webmaster">站长</span>
-                  <i class="time">{{ comment.time }}</i>
+                  {{ comment.nickname }}
+                  <span v-show="comment.isWebMaster">站长</span>
+                  <i class="time">{{ comment.createtime }}</i>
                 </div>
                 <div class="content">
                   <span v-show="false"></span>{{ comment.content }}
@@ -33,31 +34,33 @@
             ></el-button>
           </div>
           <div v-show="comment.showReplay">
-            <slot></slot>
+            <slot :comment="comment"></slot>
           </div>
           <div class="replay-list">
             <div
               class="replay-comment"
-              v-for="replay_comment in comment.replayList"
-              :key="replay_comment.replayId"
+              v-for="replay_comment in comment.subComment"
+              :key="replay_comment.commentID"
             >
               <div class="user">
                 <div class="user-info">
-                  <el-image
-                    :src="
-                      require(`../assets/imgs/${replay_comment.avatar}.png`)
-                    "
-                    fit="cover"
+                  <el-image :src="replay_comment.avatar" fit="cover" lazy>
+                    <div slot="error" class="image-slot">
+                      <el-image
+                        :src="replay_comment.avatar"
+                        fit="cover"
+                        lazy
+                      ></el-image></div
                   ></el-image>
                   <div class="messageinfo">
                     <span class="name"
-                      >{{ replay_comment.name
-                      }}<span v-show="replay_comment.webmaster">站长</span>
-                      <i class="time">{{ replay_comment.time }}</i>
+                      >{{ replay_comment.nickname
+                      }}<span v-show="replay_comment.isWebMaster">站长</span>
+                      <i class="time">{{ replay_comment.createtime }}</i>
                     </span>
                     <p class="content">
-                      <span v-show="replay_comment.replay"
-                        >@{{ replay_comment.replay_object }}：</span
+                      <span v-show="replay_comment.replayusername"
+                        >@{{ replay_comment.replayusername }}：</span
                       >{{ replay_comment.content }}
                     </p>
                   </div>
@@ -73,90 +76,32 @@
               </div>
 
               <div v-show="replay_comment.showReplay">
-                <slot></slot>
+                <slot :replay_comment="replay_comment"></slot>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <LoadMore v-show="countComments != countShow"></LoadMore>
+    <span v-show="countComments == countShow" style="font-size: 13px"
+      >-----------我也是有底线的😣-----------</span
+    >
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import LoadMore from "./LoadMore.vue";
 export default {
   name: "CommentArea",
+  components: {
+    LoadMore,
+  },
+  props: ["commentlist"],
   data() {
     return {
       showSlot: false,
-      commentlist: [
-        {
-          commentId: 1,
-          avatar: "头像",
-          name: "尤雨溪",
-          webmaster: false,
-          time: "2022/8/13",
-          content: "小兄弟你Vue写的不行啊",
-          showReplay: false,
-          replayList: [
-            {
-              replayId: 1,
-              avatar: "logo",
-              name: "山野",
-              webmaster: true,
-              time: "2022/8/13",
-              replay: true,
-              replay_object: "尤雨溪",
-              content: "你懂Vue吗？",
-              showReplay: false,
-            },
-            {
-              replayId: 2,
-              avatar: "钟离",
-              name: "钟离",
-              webmaster: false,
-              time: "2022/8/13",
-              replay: true,
-              replay_object: "山野",
-              content: "他是Vue的爹🤣",
-              showReplay: false,
-            },
-          ],
-        },
-        {
-          commentId: 2,
-          avatar: "1",
-          name: "燕飞",
-          webmaster: false,
-          time: "2022/8/13",
-          content: "小罗要有出息",
-          showReplay: false,
-          replayList: [
-            {
-              replayId: 1,
-              avatar: "logo",
-              name: "山野",
-              webmaster: true,
-              time: "2022/8/13",
-              replay: true,
-              replay_object: "燕飞",
-              content: "你谁啊？",
-              showReplay: false,
-            },
-            {
-              replayId: 2,
-              avatar: "七七",
-              name: "七七",
-              webmaster: false,
-              time: "2022/8/13",
-              replay: true,
-              replay_object: "山野",
-              content: "我是七七，是个僵尸💀",
-              showReplay: false,
-            },
-          ],
-        },
-      ],
     };
   },
   methods: {
@@ -164,6 +109,11 @@ export default {
       this.showSlot = !this.showSlot;
     },
   },
+  computed: {
+    ...mapGetters("commentList", ["countComments"]),
+    ...mapGetters("commentList", ["countShow"]),
+  },
+  mounted() {},
 };
 </script>
 

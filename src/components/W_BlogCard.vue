@@ -3,36 +3,52 @@
     <el-col :md="24">
       <div
         class="webcontainer"
-        v-for="(blogCard, index) in blogCards"
-        :key="index"
+        v-for="blogCard in blogCards"
+        :key="blogCard.id"
       >
         <div class="img-box">
-          <router-link :to="blogCard.link">
-            <el-image
-              :src="blogCard.image"
-              fit="cover"
-              lazy
-              @error="reload(blogCard, index)"
-            ></el-image>
-          </router-link>
+          <router-link
+            class="link"
+            :to="{
+              path: '/article',
+              query: {
+                id: blogCard.id, //传递参数
+              },
+            }"
+          >
+            <el-image :src="blogCard.blogCardPicture" fit="cover" lazy>
+              <div slot="error" class="image-slot">
+                <el-image
+                  :src="blogCard.blogCardPicture"
+                  fit="cover"
+                  lazy
+                ></el-image>
+              </div> </el-image
+          ></router-link>
         </div>
         <div class="card-content">
           <div class="content">
             <h4 class="title">{{ blogCard.title }}</h4>
-            <span class="short">{{ blogCard.introduce }}</span>
+            <span class="short">{{ blogCard.brief }}</span>
           </div>
           <div class="author-targ">
             <div class="author">
-              <el-image
-                :src="require(`../assets/imgs/${blogCard.authorAvatar}.png`)"
-              ></el-image>
+              <el-image :src="blogCard.userPicture" lazy>
+                <div slot="error" class="image-slot">
+                  <el-image
+                    :src="blogCard.userPicture"
+                    fit="cover"
+                    lazy
+                  ></el-image>
+                </div>
+              </el-image>
               <div class="blog-info">
-                <h4 class="name">{{ blogCard.authorName }}</h4>
-                <span class="time">{{ blogCard.time }}</span>
+                <h4 class="name">{{ blogCard.nickname }}</h4>
+                <span class="time">{{ blogCard.createtime }}</span>
               </div>
             </div>
             <div class="targ">
-              <span>{{ blogCard.tag }}</span>
+              <span>{{ blogCard.tagContent }}</span>
             </div>
           </div>
         </div>
@@ -48,12 +64,11 @@ export default {
   data() {
     return {};
   },
-  methods: {
-    reload(blogCard, index) {
-      //出现加载不出就换张照片
-      let temp = blogCard.image;
-      blogCard.image = this.blogCards[index + 3].image;
-      this.blogCards[index + 3].image = temp;
+  watch: {
+    blogCards: {
+      immediate: true,
+      deep: true,
+      handler(newValue, oldValue) {},
     },
   },
 };
@@ -77,6 +92,11 @@ export default {
         transform: scale(1.25, 1.25);
       }
     }
+
+    .el-icon-loading {
+      margin-top: 50px;
+      font-size: 50px;
+    }
   }
 
   .card-content {
@@ -97,7 +117,7 @@ export default {
         overflow: hidden;
         text-overflow: ellipsis;
         padding-top: (15 / @rem);
-        font-size: (15 / @rem);
+        font-size: (20 / @rem);
       }
     }
     .author {

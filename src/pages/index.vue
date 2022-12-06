@@ -4,9 +4,9 @@
     <div class="webcontainer hidden-xs-only">
       <el-row :gutter="25">
         <el-col :md="24" :lg="16">
-          <!-- 博客列表 -->
-          <W_BlogCard :blogCards="blogCards"></W_BlogCard>
-          <LoadMore></LoadMore>
+          <W_BlogCard :blogCards="showCards"></W_BlogCard>
+          <LoadMore v-show="isShowButton"></LoadMore>
+          <span v-show="!isShowButton" style="font-size:13px">-----------我也是有底线的😣-----------</span>
         </el-col>
         <el-col class="hidden-md-and-down" :lg="8">
           <el-row>
@@ -20,8 +20,9 @@
       <el-row :gutter="25">
         <el-col :md="24" :lg="16">
           <!-- 博客列表 -->
-          <M_BlogCard :blogCards="blogCards"></M_BlogCard>
-          <LoadMore></LoadMore>
+          <M_BlogCard :blogCards="showCards"></M_BlogCard>
+          <LoadMore v-show="isShowButton"></LoadMore>
+          <span v-show="!isShowButton" style="font-size:13px">-----------我也是有底线的😣-----------</span>
         </el-col>
       </el-row>
     </div>
@@ -35,7 +36,8 @@ import W_BlogCard from "../components/W_BlogCard.vue";
 import AuthorInfo from "../components/AuthorInfo.vue";
 import NewMessage from "../components/NewMessage.vue";
 import LoadMore from "../components/LoadMore.vue";
-import axios from "axios";
+import { mapGetters, mapState } from "vuex";
+
 export default {
   name: "Index",
   components: {
@@ -46,83 +48,12 @@ export default {
     NewMessage,
     LoadMore,
   },
-  data() {
-    return {
-      blogCards: [
-        {
-          blogId: 1,
-          image: "7",
-          link: "/article",
-          title: "初始Vue",
-          introduce:
-            "想让Vue工作，就必须创建一个Vue实例，且要传入一个配置对象....",
-          authorAvatar: "logo",
-          authorName: "山野",
-          time: "2022/08/09",
-          tag: "Vue",
-        },
-        {
-          blogId: 5,
-          image: "4",
-          link: "/article",
-          title: "初始Vue",
-          introduce:
-            "想让Vue工作，就必须创建一个Vue实例，且要传入一个配置对象....",
-          authorAvatar: "logo",
-          authorName: "山野",
-          time: "2022/08/09",
-          tag: "Vue",
-        },
-        {
-          blogId: 2,
-          image: "1",
-          link: "/article",
-          title: "初始Vue",
-          introduce:
-            "想让Vue工作，就必须创建一个Vue实例，且要传入一个配置对象....",
-          authorAvatar: "logo",
-          authorName: "山野",
-          time: "2022/08/09",
-          tag: "Vue",
-        },
-        {
-          blogId: 3,
-          image: "2",
-          link: "/article",
-          title: "初始Vue",
-          introduce:
-            "想让Vue工作，就必须创建一个Vue实例，且要传入一个配置对象....",
-          authorAvatar: "logo",
-          authorName: "山野",
-          time: "2022/08/09",
-          tag: "Vue",
-        },
-        {
-          blogId: 4,
-          image: "3",
-          link: "/article",
-          title: "初始Vue",
-          introduce:
-            "想让Vue工作，就必须创建一个Vue实例，且要传入一个配置对象....",
-          authorAvatar: "logo",
-          authorName: "山野",
-          time: "2022/08/09",
-          tag: "Vue",
-        },
-      ],
-    };
+  computed: {
+    ...mapState("blogCards", ["showCards"]),
+    ...mapGetters("blogCards", ["isShowButton"]),
   },
   mounted() {
-    this.blogCards.forEach((e) => {
-      axios({
-        url: `http://localhost:8080/img/getimg/${e.image}`,
-        responseType: "blob",
-      }).then((res) => {
-        let data = new Blob([res.data]);
-        let url = window.URL.createObjectURL(data);
-        e.image = url;
-      });
-    });
+    this.$store.dispatch("blogCards/getblogs");
   },
 };
 </script>

@@ -1,14 +1,14 @@
 <template>
   <div class="friendcontainer">
     <div class="webfriend-card hidden-xs-only">
-      <el-image :src="require(`../assets/imgs/${card.avatar}.png`)"></el-image>
-      <div class="name">{{ card.name }}</div>
-      <div class="sign">{{ card.sign }}</div>
+      <el-image :src="card.portrait"></el-image>
+      <div class="name">{{ card.nickname }}</div>
+      <div class="sign">{{ card.sketch }}</div>
     </div>
     <div class="modilefriend-card hidden-sm-and-up">
-      <el-image :src="require(`../assets/imgs/${card.avatar}.png`)"></el-image>
-      <div class="name">{{ card.name }}</div>
-      <div class="sign">{{ card.sign }}</div>
+      <el-image :src="card.portrait"></el-image>
+      <div class="name">{{ card.nickname }}</div>
+      <div class="sign">{{ card.sketch }}</div>
     </div>
   </div>
 </template>
