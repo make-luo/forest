@@ -34,6 +34,7 @@ import W_BlogCard from "../components/W_BlogCard.vue";
 import LoadMore from "../components/LoadMore.vue";
 import { mapGetters, mapState } from "vuex";
 import axios from "axios";
+import baseURL from "../store/baseURL";
 export default {
   name: "Sort",
   data() {
@@ -56,7 +57,7 @@ export default {
     },
     //axios的同步初试
     getAllSortList() {
-      return axios.get("http://10.10.120.234:8080/tag/getAllTag");
+      return axios.get(`${baseURL.baseURL}/tag/getAllTag`);
     },
     async getSortList() {
       let result = null;

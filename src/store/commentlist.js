@@ -1,17 +1,18 @@
 import axios from "axios";
+import baseURL from "./baseURL";
 export default {
     namespaced: true,
     actions: {
         getCommentListByBlogID(context, value) { //传入blogID
             axios
                 .get(
-                    `http://10.10.120.234:8080/comment/getCommentList/${value}`
+                    `${baseURL.baseURL}/comment/getCommentList/${value}`
                 )
                 .then(({ data }) => {
                     data.forEach((e) => {
                         e.subComment.forEach((e) => {
                             axios({
-                                url: `http://10.10.120.234:8080/picture/getAvatar/${e.pictureID}`,
+                                url: `${baseURL.baseURL}/picture/getAvatar/${e.pictureID}`,
                                 responseType: "blob",
                             }).then((res) => {
                                 let data = new Blob([res.data]);
@@ -20,7 +21,7 @@ export default {
                             });
                         });
                         axios({
-                            url: `http://10.10.120.234:8080/picture/getAvatar/${e.pictureID}`,
+                            url: `${baseURL.baseURL}/picture/getAvatar/${e.pictureID}`,
                             responseType: "blob",
                         }).then((res) => {
                             let data = new Blob([res.data]);

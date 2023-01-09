@@ -36,7 +36,7 @@
 
 <script>
 import axios from "axios";
-
+import baseURL from "../store/baseURL";
 export default {
   name: "NewMessage",
   data() {
@@ -46,11 +46,11 @@ export default {
   },
   mounted() {
     axios
-      .get("http://10.10.120.234:8080/comment/getLatestComment")
+      .get(`${baseURL.baseURL}/comment/getLatestComment`)
       .then(({ data }) => {
         data.forEach((e) => {
           axios({
-            url: `http://10.10.120.234:8080/picture/getAvatar/${e.pictureID}`,
+            url: `${baseURL.baseURL}/picture/getAvatar/${e.pictureID}`,
             responseType: "blob",
           }).then((res) => {
             let data = new Blob([res.data]);

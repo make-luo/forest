@@ -71,6 +71,7 @@ import { mavonEditor } from "mavon-editor";
 import W_CommentCard from "./W_CommentCard.vue";
 import "mavon-editor/dist/css/index.css";
 import axios from "axios";
+import baseURL from "../store/baseURL";
 export default {
   name: "MessageBox",
   props: ["comment", "replay_comment"],
@@ -138,7 +139,7 @@ export default {
         Comment.fatherCommentID = this.comment.commentID;
         Comment.replayuserid = this.comment.userID;
         axios
-          .post("http://10.10.120.234:8080/comment/saveComment", Comment)
+          .post(`${baseURL.baseURL}/comment/saveComment`, Comment)
           .then((res) => {
             this.$message({
               message: res.data,
@@ -155,7 +156,7 @@ export default {
         Comment.fatherCommentID = this.replay_comment.fatherCommentID;
         Comment.replayuserid = this.replay_comment.userID;
         axios
-          .post("http://10.10.120.234:8080/comment/saveComment", Comment)
+          .post(`${baseURL.baseURL}/comment/saveComment`, Comment)
           .then((res) => {
             this.$message({
               message: res.data,
@@ -171,7 +172,7 @@ export default {
         Comment.subComment = null; //子评论
       } else {
         axios
-          .post("http://10.10.120.234:8080/comment/saveComment", Comment)
+          .post(`${baseURL.baseURL}/comment/saveComment`, Comment)
           .then((res) => {
             this.$message({
               message: res.data,

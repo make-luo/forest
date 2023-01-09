@@ -1,11 +1,12 @@
 import axios from "axios";
+import baseURL from "./baseURL";
 export default {
     namespaced: true,
     actions: {
         getBlogContentByID(context, value) {
             axios
                 .get(
-                    `http://10.10.120.234:8080/blogcontent/getBlogContentByID/${value}`
+                    `${baseURL.baseURL}/blogcontent/getBlogContentByID/${value}`
                 )
                 .then(({ data }) => {
                     context.commit("getBlogContentByID", data.textcontent);

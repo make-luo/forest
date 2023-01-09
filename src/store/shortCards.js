@@ -1,10 +1,11 @@
 import axios from "axios";
+import baseURL from "./baseURL";
 export default {
     namespaced: true,
     actions: {
         getShortCards(context, value) {
             axios
-                .get("http://10.10.120.234:8080/short/getAllShort")
+                .get(`${baseURL.baseURL}/short/getAllShort`)
                 .then(({ data }) => {
                     context.commit("getShortCards", data)
                     context.commit("getMoreShort", 5);

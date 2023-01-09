@@ -82,6 +82,7 @@
 <script>
 import axios from "axios";
 import FriendCard from "../components/FriendCard.vue";
+import baseURL from "../store/baseURL";
 export default {
   name: "Friends",
   components: { FriendCard },
@@ -102,7 +103,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://10.10.120.234:8080/friend/getAllFriends")
+      .get(`${baseURL.baseURL}/friend/getAllFriends`)
       .then(({ data }) => {
         this.cards = data;
       });

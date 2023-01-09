@@ -1,13 +1,14 @@
 import axios from "axios";
+import baseURL from "./baseURL";
 export default {
     namespaced: true,
     actions: {
         getblogs(context, value) {
-            axios("http://10.10.120.234:8080/blog/getblogs").then(({ data }) => {
+            axios(`${baseURL.baseURL}/blog/getblogs`).then(({ data }) => {
                 data.forEach((e) => {
                     // 获取博客图片
                     axios({
-                        url: `http://10.10.120.234:8080/picture/getAvatar/${e.pictureid}`,
+                        url: `${baseURL.baseURL}/picture/getAvatar/${e.pictureid}`,
                         responseType: "blob",
                     }).then((res) => {
                         let data = new Blob([res.data]);
@@ -16,7 +17,7 @@ export default {
                     });
                     // 获取作者图片
                     axios({
-                        url: `http://10.10.120.234:8080/picture/getAvatar/${e.userPictureId}`,
+                        url: `${baseURL.baseURL}/picture/getAvatar/${e.userPictureId}`,
                         responseType: "blob",
                     }).then((res) => {
                         let data = new Blob([res.data]);
@@ -30,12 +31,12 @@ export default {
         },
         getBlogsById({ commit }, value) {
             axios
-                .get(`http://10.10.120.234:8080/blog/getsortblogs/${value}`)
+                .get(`${baseURL.baseURL}/blog/getsortblogs/${value}`)
                 .then(({ data }) => {
                     data.forEach((e) => {
                         // 获取博客图片
                         axios({
-                            url: `http://10.10.120.234:8080/picture/getAvatar/${e.pictureid}`,
+                            url: `${baseURL.baseURL}/picture/getAvatar/${e.pictureid}`,
                             responseType: "blob",
                         }).then((res) => {
                             let data = new Blob([res.data]);
@@ -44,7 +45,7 @@ export default {
                         });
                         // 获取作者图片
                         axios({
-                            url: `http://10.10.120.234:8080/picture/getAvatar/${e.userPictureId}`,
+                            url: `${baseURL.baseURL}/picture/getAvatar/${e.userPictureId}`,
                             responseType: "blob",
                         }).then((res) => {
                             let data = new Blob([res.data]);
